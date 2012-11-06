@@ -49,7 +49,7 @@
       <item name="-" />
 
       <item name="About" action="de.augustin.jameica.budget.gui.action.About" />
-      <item name="EnterData" action="de.augustin.jameica.budget.gui.action.EnterData" />
+      <item name="EnterData" shortcut="ALT+Q" action="de.augustin.jameica.budget.gui.action.EnterData" />
     </item>
   </menu>
 
