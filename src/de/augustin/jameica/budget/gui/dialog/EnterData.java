@@ -103,7 +103,7 @@ public class EnterData extends AbstractDialog
 				close();
 				try {
 					new de.augustin.jameica.budget.gui.dialog.EnterData(100).open();
-				} catch (Exception e) {
+					} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
