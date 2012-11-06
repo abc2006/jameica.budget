@@ -3,9 +3,9 @@
 <plugin xmlns="http://www.willuhn.de/schema/jameica-plugin"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.willuhn.de/schema/jameica-plugin http://www.willuhn.de/schema/jameica-plugin-1.0.xsd"
-        name="jameica.example" version="1.2.0" class="de.augustin.jameica.budget.Plugin">
+        name="jameica.budget" version="1.2.0" class="de.augustin.jameica.budget.Plugin">
 
-  <description>Example Plugin for Jameica</description>
+  <description>Budget Plugin for Jameica</description>
   <url></url>
   <homepage>http://www.willuhn.de/products/jameica</homepage>
   <license>GPL - http://www.gnu.org/copyleft/gpl.html</license>
@@ -43,12 +43,12 @@
     <item name="Budget plugin">
 
 
-      <item name="New Project" shortcut="ALT+P" action="de.willuhn.jameica.example.gui.action.ProjectDetail" />
+      <item name="New Project" shortcut="ALT+P" action="de.augustin.jameica.budget.gui.action.EnterData" />
 
       <!-- use "-" as name to create a separator //-->
       <item name="-" />
 
-      <item name="About" action="de.willuhn.jameica.budget.gui.action.About" />
+      <item name="About" action="de.augustin.jameica.budget.gui.action.About" />
       <item name="EnterData" action="de.augustin.jameica.budget.gui.action.EnterData" />
     </item>
   </menu>
@@ -58,8 +58,8 @@
 
     <!-- Same procedure as in the menu tag //-->
 
-    <item name="Example Plugin" icon-close="folder.png" icon-open="folder-open.png" action="de.willuhn.jameica.example.gui.action.Welcome">
-      <item name="Projects" icon-close="text-x-generic.png" action="de.willuhn.jameica.example.gui.action.ProjectList" />
+    <item name="Example Plugin" icon-close="folder.png" icon-open="folder-open.png" action="de.augustin.jameica.budget.gui.action.EnterData">
+      <item name="Projects" icon-close="text-x-generic.png" action="de.augustin.jameica.budget.gui.action.EnterData" />
     </item>
   </navigation>
 
