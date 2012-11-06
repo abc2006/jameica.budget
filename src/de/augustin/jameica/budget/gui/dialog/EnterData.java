@@ -32,10 +32,10 @@ public class EnterData extends AbstractDialog
 	protected void paint(Composite parent) throws Exception
 	{
 		
-		DateInput test = new DateInput();
+		DateInput datum = new DateInput();
 		
-		test.paint(parent,5);
-		test.setValue("1.1.1970");
+		datum.paint(parent,100);
+		datum.setValue("1.1.1970");
 		
 		CheckboxInput full = new CheckboxInput(false);
 		full.setName("Vollgetankt?");
@@ -48,12 +48,21 @@ public class EnterData extends AbstractDialog
 		liter.paint(parent);
 		
 		IntegerInput km_ges = new IntegerInput();
-		
-		km_ges.setHint("Bitte Kilometer eintragen");
-		
-				
-		km_ges.setName("Name des km-Feldes");
+		km_ges.setHint("Bitte Kilometerstand eintragen");
 		km_ges.paint(parent);
+		
+		IntegerInput km_tour = new IntegerInput();
+		km_tour.setHint("Oder gefahrene Kilometer eintragen");
+		km_tour.paint(parent);
+		
+		
+		IntegerInput Tankstelle = new IntegerInput();
+		Tankstelle.setHint("Bitte Tankstelle angeben");
+		Tankstelle.paint(parent);
+		
+		IntegerInput Notizen = new IntegerInput();
+		Notizen.setHint("Sonstiges (Öl, Reifen, usw) ");
+		Notizen.paint(parent);
 		
 		
 		//IntegerInput km_tour = new IntegerInput();
@@ -78,12 +87,29 @@ public class EnterData extends AbstractDialog
 		group.addLabelPair("Working directory", new LabelInput(""+p.getResources().getWorkPath()));
 		
 		ButtonArea buttons = new ButtonArea();
-		buttons.addButton("Close",new Action() {
+		buttons.addButton("Close",new Action() 
+	{
       public void handleAction(Object context) throws ApplicationException
       {
         close();
       }
     },null,true);
+		
+		
+		buttons.addButton("Nächster Eintrag", new Action()
+		{
+			public void handleAction(Object context) throws ApplicationException
+			{
+				close();
+				try {
+					new de.augustin.jameica.budget.gui.dialog.EnterData(100).open();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		},null,true);
+		
 		buttons.paint(parent);
 		getShell().pack();
 
