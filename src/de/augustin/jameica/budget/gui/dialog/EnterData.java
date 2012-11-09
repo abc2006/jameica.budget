@@ -3,6 +3,8 @@ package de.augustin.jameica.budget.gui.dialog;
 import java.text.DecimalFormat;
 
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import java.util.*;
 
 import de.augustin.jameica.budget.Plugin;
 import de.willuhn.jameica.gui.Action;
@@ -33,25 +35,43 @@ public class EnterData extends AbstractDialog
 	}
 	protected void paint(Composite parent) throws Exception
 	{
+		DecimalFormat Liter = new DecimalFormat("##.##");
+		DecimalInput liter = new DecimalInput(Liter);
+		liter.setHint("liter");
 		
-		DateInput datum = new DateInput();
+		liter.paint(parent);
+		
+		
+		final DateInput datum = new DateInput();
 		datum.setMandatory(true);
 		//datum.setTitle("Hier bitte Datum angeben");
-		//datum.addListener(null);
+		/*datum.addListener(new org.eclipse.swt.widgets.Listener()
+		  {
+		      public void handleEvent(Event event)
+		      {
+		        // Das Event wird immer dann ausgeloest, wenn sich der Focus
+		        // des Eingabe-Felds aendert. Also sowohl beim Aktivieren
+		        // als auch beim Deaktivieren.
+		        
+		    	
+		    	Application.getMessagingFactory().sendMessage(new StatusBarMessage("Nachricht 1",StatusBarMessage.TYPE_SUCCESS));
+		    	
+		      }
+		  }
+		  
+		);
+		*/
 		datum.setComment("Datum");
 		datum.paint(parent,100);
 		
 		
 		CheckboxInput full = new CheckboxInput(false);
 		full.setName("Vollgetankt?");
+		
 		full.paint(parent);
 		
 		
-		DecimalFormat Liter = new DecimalFormat("##.##");
-		DecimalInput liter = new DecimalInput(Liter);
-		liter.setHint("liter");
 		
-		liter.paint(parent);
 		
 		IntegerInput km_ges = new IntegerInput();
 		km_ges.setHint("Bitte Kilometerstand eintragen");
@@ -62,11 +82,11 @@ public class EnterData extends AbstractDialog
 		km_tour.paint(parent);
 		
 		
-		TextInput Tankstelle = new TextInput("panelText");
+		TextInput Tankstelle = new TextInput("");
 		Tankstelle.setHint("Bitte Tankstelle angeben");
 		Tankstelle.paint(parent);
 		
-		TextInput Notizen = new TextInput("scheiss hier");
+		TextInput Notizen = new TextInput("");
 		Notizen.setHint("Sonstiges (Öl, Reifen, usw) ");
 		Notizen.paint(parent);
 		
