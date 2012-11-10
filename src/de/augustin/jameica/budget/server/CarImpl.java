@@ -214,7 +214,7 @@ public class CarImpl extends AbstractDBObject implements Car
 	/**
 	 * @see de.willuhn.jameica.example.rmi.Project#setName(java.lang.String)
 	 */
-	public void setFueldate(Date fueldate) throws RemoteException
+	public void setFuelDate(Date fueldate) throws RemoteException
 	{
     // Please use setField(<fieldname>,<value>) to store the data into the right field.
     setAttribute("fueldate",fueldate);
