@@ -18,10 +18,11 @@ public class Summary extends AbstractView
 		// draw the title
 		GUI.getView().setTitle("Summary");
 		
-	
-        LabelGroup group = new LabelGroup(this.getParent(),"welcome");
+		// LabelGroup ist ein abgetrennter bereich mit 3D-Kante und Überschrift
+        //LabelGroup group = new LabelGroup(this.getParent(),"welcome");
+		//group.addText("this page intentionally left blank ;)",false);
 		
-		group.addText("this page intentionally left blank ;)",false);
+		
 		//################################## Ab hier wird eine zweispaltige Tabelle erstellt. Dies 
 		// hat nichts mit dem Kopf zu tun ! 
 		
@@ -40,10 +41,12 @@ public class Summary extends AbstractView
 	    // Zurück zum Container itself:
 	    c.addHeadline("Summary");
 	    // ##########leider wird die Tabelle selbst noch nicht ausgegeben
+	    // ###########natürlich wird die Tabelle nicht ausgegeben, weil das da nur den Kopfbereich festlegt
 	    
 	    
+	    // hier wird ein neues Control-Object Instantiert und gemalt ^^ ... 
 	    SummaryControl control = new SummaryControl(this);
-		
+	    // Ich glaube, der Inhalt wird auch im getProjectsTable geholt ... 
 		control.getProjectsTable().paint(this.getParent());
 	
 	
