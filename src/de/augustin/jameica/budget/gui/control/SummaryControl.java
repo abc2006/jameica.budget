@@ -11,6 +11,7 @@ import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Part;
 import de.willuhn.jameica.gui.formatter.CurrencyFormatter;
 import de.willuhn.jameica.gui.formatter.DateFormatter;
+import de.willuhn.jameica.gui.formatter.Formatter;
 import de.willuhn.jameica.gui.parts.TablePart;
 
 
@@ -44,11 +45,20 @@ public class SummaryControl extends AbstractControl
 	    // 4) create the table
 		projectList = new TablePart(new de.augustin.jameica.budget.gui.action.EnterData());
 		
-		// 5) now we have to add some columns.
-	    projectList.addColumn(Settings.i18n().tr("Name of project"),"name"); // "name" is the field name from the sql table.
+		
+		// 5) the following fields are a date fields. So we add a date formatter. 
+	    projectList.addColumn(Settings.i18n().tr("Tankdatum"),"fueldate",new DateFormatter(Settings.DATEFORMAT));
 
-	    // 6) the following fields are a date fields. So we add a date formatter. 
-	    projectList.addColumn(Settings.i18n().tr("Start date"),"startdate",new DateFormatter(Settings.DATEFORMAT));
+	    // 6) now we have to add some columns.
+	    //Frage: wie kann ich eine Spalte auf changeable /sortierung/align) setzen, wenn man keinen formatter angeben will? 
+		projectList.addColumn(Settings.i18n().tr("Trip [km]"),"km_trip"); // "km_trip" is the field name from the sql table.
+	    projectList.addColumn(Settings.i18n().tr("Gesamt [km]"),"km_total"); // "km_total" is the field name from the sql table.
+	    projectList.addColumn(Settings.i18n().tr("Preis/l[Euro]"),"price_liter", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT)); // "name" is the field name from the sql table.
+	    projectList.addColumn(Settings.i18n().tr("Gesamt [Euro]"),"price_total", new CurrencyFormatter(Settings.CURRENCY, Settings.DECIMALFORMAT)); // "name" is the field name from the sql table.
+	    projectList.addColumn(Settings.i18n().tr("l/100km[l]"),"consumption"); // "name" is the field name from the sql table.
+	    projectList.addColumn(Settings.i18n().tr("Tankstelle"),"station"); // "name" is the field name from the sql table.
+	    projectList.addColumn(Settings.i18n().tr("Notizen"),"comments"); // "name" is the field name from the sql table.
+	    
 
 
 	    // 7) calculated project price (price per hour * hours)
