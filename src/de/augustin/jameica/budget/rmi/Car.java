@@ -102,41 +102,71 @@ public interface Car extends DBObject
 	   * @param name name of the project.
 	   * @throws RemoteException
 	   */
-//	  public void setName(String name) throws RemoteException;
+	  public void setFuelDate(Date fueldate) throws RemoteException;
 	  
 	  /**
 	   * Sets the description  of the project.
 	   * @param description description  of the project.
 	   * @throws RemoteException
 	   */
-//	  public void setDescription(String description) throws RemoteException;
+	  public void setKm_Trip(double km_trip) throws RemoteException;
 	  
 	  /**
 	   * Sets the price of the project.
 	   * @param price price of the project.
 	   * @throws RemoteException
 	   */
-//	  public void setPrice(double price) throws RemoteException;
+	  public void setKm_Total(double km_total) throws RemoteException;
 	  
 	  /**
 	   * Sets the start date of the project.
 	   * @param startDate start date of the project.
 	   * @throws RemoteException
 	   */
-//	  public void setStartDate(Date startDate) throws RemoteException;
+	  public void setPrice_Liter(double price_liter) throws RemoteException;
 	  
 	  /**
 	   * Sets the end date of the project.
 	   * @param endDate end date of the project.
 	   * @throws RemoteException
 	   */
-//	  public void setEndDate(Date endDate) throws RemoteException;
+	  public void setPrice_Total(double price_total) throws RemoteException;
 
+	  
+	  /**
+	   * Sets the end date of the project.
+	   * @param endDate end date of the project.
+	   * @throws RemoteException
+	   */
+	  public void setConsumption(double consumption) throws RemoteException;  
+	  
+	  
+	  /**
+	   * Sets the end date of the project.
+	   * @param endDate end date of the project.
+	   * @throws RemoteException
+	   */
+	  public void setStation(String station) throws RemoteException;
+	  
+	  /**
+	   * Sets the end date of the project.
+	   * @param endDate end date of the project.
+	   * @throws RemoteException
+	   */
+	  public void setComment(String comment) throws RemoteException;
+	  
+	  
+	  
+	  // #############fertig mit settern 
 	  /**
 	   * Additionally we want to have a method that fetches all tasks from this project.
 	   * @return list of all tasks within this project.
 	   * @throws RemoteException
 	   */
+	  
+	  
+	  
+	  
 //	  public DBIterator getTasks() throws RemoteException;
 	  
 	  /**
