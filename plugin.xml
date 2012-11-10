@@ -58,7 +58,7 @@
 
     <!-- Same procedure as in the menu tag //-->
 
-    <item name="Example Plugin" icon-close="folder.png" icon-open="folder-open.png" action="de.augustin.jameica.budget.gui.action.EnterData">
+    <item name="Budget Plugin" icon-close="folder.png" icon-open="folder-open.png" action="de.augustin.jameica.budget.gui.action.EnterData">
       <item name="Projects" icon-close="text-x-generic.png" action="de.augustin.jameica.budget.gui.action.Summary" />
     </item>
   </navigation>
@@ -77,7 +77,7 @@
     //-->
 
   <services>
-   
+       <service name="Budgetdatabase" depends="" autostart="true" class="de.augustin.jameica.budget.rmi.BudgetDBService" />
   </services>
 </plugin>
 
