@@ -1,9 +1,11 @@
 package de.augustin.jameica.budget.gui.dialog;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import java.util.*;
 
 import de.augustin.jameica.budget.Plugin;
@@ -44,8 +46,13 @@ public class EnterData extends AbstractDialog
 		
 		final DateInput datum = new DateInput();
 		datum.setMandatory(true);
+		datum.setComment("Datum");
+		datum.paint(parent,100);
+		
+		//DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+		//datum.setValue(df);
 		//datum.setTitle("Hier bitte Datum angeben");
-		/*datum.addListener(new org.eclipse.swt.widgets.Listener()
+		datum.addListener(new Listener()
 		  {
 		      public void handleEvent(Event event)
 		      {
@@ -54,22 +61,29 @@ public class EnterData extends AbstractDialog
 		        // als auch beim Deaktivieren.
 		        
 		    	
+		    	DateInput test = (DateInput) datum.getValue();
 		    	Application.getMessagingFactory().sendMessage(new StatusBarMessage("Nachricht 1",StatusBarMessage.TYPE_SUCCESS));
+		    	new de.augustin.jameica.budget.gui.action.About();
 		    	
 		      }
 		  }
 		  
 		);
-		*/
-		datum.setComment("Datum");
-		datum.paint(parent,100);
+		
+		
 		
 		
 		CheckboxInput full = new CheckboxInput(false);
 		full.setName("Vollgetankt?");
-		
 		full.paint(parent);
-		
+		full.addListener(new Listener()
+		{
+			public void handleEvent(Event event)
+			{
+				new de.augustin.jameica.budget.gui.action.About();
+			}
+			
+		});
 		
 		
 		

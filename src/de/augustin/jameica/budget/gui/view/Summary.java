@@ -1,6 +1,7 @@
 package de.augustin.jameica.budget.gui.view;
 
 
+import de.augustin.jameica.budget.gui.control.SummaryControl;
 import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.GUI;
 import de.willuhn.jameica.gui.util.ColumnLayout;
@@ -39,6 +40,14 @@ public class Summary extends AbstractView
 	    // Zurück zum Container itself:
 	    c.addHeadline("Summary");
 	    // ##########leider wird die Tabelle selbst noch nicht ausgegeben
+	    
+	    
+	    SummaryControl control = new SummaryControl(this);
+		
+		control.getProjectsTable().paint(this.getParent());
+	
+	
+	
 		}// public void bind
 	
 	
