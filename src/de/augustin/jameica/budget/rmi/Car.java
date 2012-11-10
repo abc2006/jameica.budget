@@ -62,7 +62,7 @@ public interface Car extends DBObject
 	   * @return email of project contact.
 	   * @throws RemoteException
 	   */
-	  public double getPrice_liter() throws RemoteException;
+	  public double getPrice_Liter() throws RemoteException;
 	  
 	  /**
 	   * Returns the price per hour for the project.
@@ -102,48 +102,48 @@ public interface Car extends DBObject
 	   * @param name name of the project.
 	   * @throws RemoteException
 	   */
-	  public void setName(String name) throws RemoteException;
+//	  public void setName(String name) throws RemoteException;
 	  
 	  /**
 	   * Sets the description  of the project.
 	   * @param description description  of the project.
 	   * @throws RemoteException
 	   */
-	  public void setDescription(String description) throws RemoteException;
+//	  public void setDescription(String description) throws RemoteException;
 	  
 	  /**
 	   * Sets the price of the project.
 	   * @param price price of the project.
 	   * @throws RemoteException
 	   */
-	  public void setPrice(double price) throws RemoteException;
+//	  public void setPrice(double price) throws RemoteException;
 	  
 	  /**
 	   * Sets the start date of the project.
 	   * @param startDate start date of the project.
 	   * @throws RemoteException
 	   */
-	  public void setStartDate(Date startDate) throws RemoteException;
+//	  public void setStartDate(Date startDate) throws RemoteException;
 	  
 	  /**
 	   * Sets the end date of the project.
 	   * @param endDate end date of the project.
 	   * @throws RemoteException
 	   */
-	  public void setEndDate(Date endDate) throws RemoteException;
+//	  public void setEndDate(Date endDate) throws RemoteException;
 
 	  /**
 	   * Additionally we want to have a method that fetches all tasks from this project.
 	   * @return list of all tasks within this project.
 	   * @throws RemoteException
 	   */
-	  public DBIterator getTasks() throws RemoteException;
+//	  public DBIterator getTasks() throws RemoteException;
 	  
 	  /**
 	   * Returns the effort summary from all tasks of this project. 
 	   * @return effort summary from all tasks of this project.
 	   * @throws RemoteException
 	   */
-	  public double getEfforts() throws RemoteException;
+//	  public double getEfforts() throws RemoteException;
 	
 }

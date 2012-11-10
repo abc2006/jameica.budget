@@ -3,7 +3,7 @@
 <plugin xmlns="http://www.willuhn.de/schema/jameica-plugin"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.willuhn.de/schema/jameica-plugin http://www.willuhn.de/schema/jameica-plugin-1.0.xsd"
-        name="jameica.budget" version="1.2.0" class="de.augustin.jameica.budget.Plugin">
+        name="jameica.budget" version="2.2.2" class="de.augustin.jameica.budget.Plugin">
 
   <description>Budget Plugin for Jameica</description>
   <url></url>
@@ -77,7 +77,7 @@
     //-->
 
   <services>
-       <service name="Budgetdatabase" depends="" autostart="true" class="de.augustin.jameica.budget.rmi.BudgetDBService" />
+       <service name="budgetdatabaseservice" depends="" autostart="true" class="de.augustin.jameica.budget.rmi.BudgetDBService" />
   </services>
 </plugin>
 

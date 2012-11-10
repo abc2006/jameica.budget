@@ -63,7 +63,7 @@ public class Settings
 				// client, the factory returns the remote dbService from the
 				// Jameica server.
 				// The name and class of the service is defined in plugin.xml
-				db = (DBService) Application.getServiceFactory().lookup(Plugin.class,"exampledatabase");
+				db = (DBService) Application.getServiceFactory().lookup(Plugin.class,"budgetdatabaseservice");
 				return db;
 			}
 			catch (Exception e)
