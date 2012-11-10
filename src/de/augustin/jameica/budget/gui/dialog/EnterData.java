@@ -141,6 +141,7 @@ public class EnterData extends AbstractDialog
 		{
 			public void handleAction(Object context) throws ApplicationException
 			{
+				de.augustin.jameica.budget.gui.control.SummaryControl.handleStore();
 				close(); // hier muss dann natürlich in die Datenbank geschrieben werden
 				Application.getMessagingFactory().sendMessage(new StatusBarMessage("Task stored successfully",StatusBarMessage.TYPE_SUCCESS));
 				//Nun möchte ich bitte auch aus der Datenbank auslesen und die Anzeige im Hintergrund aktualisieren... Naja, erstmal die Datenbank ... 

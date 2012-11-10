@@ -47,7 +47,7 @@ public class Summary extends AbstractView
 	    // hier wird ein neues Control-Object Instantiert und gemalt ^^ ... 
 	    SummaryControl control = new SummaryControl(this);
 	    // Ich glaube, der Inhalt wird auch im getProjectsTable geholt ... 
-		control.getProjectsTable().paint(this.getParent());
+		control.getCarTable().paint(this.getParent());
 	
 	
 	
