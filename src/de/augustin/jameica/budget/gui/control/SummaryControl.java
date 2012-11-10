@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 import de.willuhn.datasource.rmi.DBIterator;
 import de.willuhn.datasource.rmi.DBService;
 import de.augustin.jameica.budget.Settings;
+import de.augustin.jameica.budget.rmi.Car;
 import de.willuhn.jameica.gui.AbstractControl;
 import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Part;
@@ -34,16 +35,16 @@ public class SummaryControl extends AbstractControl
 	  {
 		
 		// 1) get the dataservice
-	    //DBService service = Settings.getDBService();
+	    DBService service = Settings.getDBService();
 	    
 	    // 2) now we can create the project list.
 	    //    We do not need to specify the implementing class for
 	    //    the interface "Project". Jameicas Classloader knows
 	    //    all classes an finds the right implementation automatically. ;)
-	    //DBIterator projects = service.createList(Project.class);
+	    DBIterator cars = service.createList(Car.class);
 	    
 	    // 4) create the table
-		projectList = new TablePart(new de.augustin.jameica.budget.gui.action.EnterData());
+		projectList = new TablePart(cars, new de.augustin.jameica.budget.gui.action.EnterData());
 		
 		
 		// 5) the following fields are a date fields. So we add a date formatter. 
