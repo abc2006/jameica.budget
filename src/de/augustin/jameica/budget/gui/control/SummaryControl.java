@@ -1,6 +1,7 @@
 package de.augustin.jameica.budget.gui.control;
 
 import java.rmi.RemoteException;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 
@@ -36,11 +37,11 @@ public class SummaryControl extends AbstractControl
 	  private DateInput fueldate;
 	  private DecimalInput km_trip;
 	  private DecimalInput km_total;
-	  private DecimalInput price_trip;
+	  private DecimalInput price_liter;
 	  private DecimalInput price_total;
 	  private DecimalInput consumption;
 	  private TextInput station;
-	  private TextInput comments;
+	  private Input comments;
 	// this is the currently opened car
 	private Car car;
 
@@ -64,53 +65,64 @@ public class SummaryControl extends AbstractControl
 	
 	  public Input getFuelDate() throws RemoteException
 	  {
-	    // if (fueldate != null)
-	    //  return fueldate;
-	    // "255" is the maximum length for this input field.
-	    //name = new TextInput(getProject().getName(),255);
-	    //name.setMandatory(true);
-	    //name.setName(Settings.i18n().tr("Name"));
-	    
-	    return fueldate;
+	    fueldate = new DateInput(new Date());
+		fueldate.setComment("Tankdatum");
+		return fueldate;
 	  }
 	
 	  public Input getKm_Trip() throws RemoteException
 	  {
 	    //if (km_trip != null)
+		  km_trip = new DecimalInput(Settings.DECIMALFORMAT);
+		  km_trip.setComment("Tripkilometer");
 	      return km_trip;
 	  }
 	
 	  public Input getKm_Total() throws RemoteException
 	  {
 	    //if (km_trip != null)
+		  km_total = new DecimalInput(new DecimalFormat("#"));
+		  km_total.setComment("Gesamtkilometer");
 	      return km_total;
 	  }
-	  public Input getPrice_Trip() throws RemoteException
+	  public Input getPrice_Liter() throws RemoteException
 	  {
 	    //if (km_trip != null)
-	      return price_trip;
+		  price_liter = new DecimalInput(Settings.DECIMALFORMAT);
+		  price_liter.setComment("Preis/Liter");
+	      return price_liter;
 	  }
 	  public Input getPrice_Total() throws RemoteException
 	  {
 	    //if (km_trip != null)
+		  price_total = new DecimalInput(Settings.DECIMALFORMAT);
+		  price_total.setComment("Gesamtpreis");
 	      return price_total;
 	  }
 	  public Input getConsumption() throws RemoteException
 	  {
 	    //if (km_trip != null)
+		  consumption = new DecimalInput(Settings.DECIMALFORMAT);
+		  consumption.setComment("Verbrauch/100km");
 	      return consumption;
 	  }
 	  
 	  public Input getStation() throws RemoteException
 	  {
 	    //if (km_trip != null)
+		  station = new TextInput("");
+		  station.setComment("Tankstelle");
 	      return station;
 	  }
 	  
 	  public Input getComments() throws RemoteException
 	  {
-	    //if (km_trip != null)
-	      return comments;
+		//comments = new TextInput(getCar().getComment(),255);
+		comments = new TextInput("");
+		comments.setComment("Notizen");
+		//comments.setMandatory(true);
+		//comments.setName(Settings.i18n().tr("Name"));
+		return comments;
 	  }
 	public Part getCarTable() throws RemoteException
 	  {
@@ -167,14 +179,14 @@ public class SummaryControl extends AbstractControl
 	      // invoke all Setters of this project and assign the current values
 	      //p.setName((String) getName().getValue());
 	      //p.setDescription((String) getDescription().getValue());
-	      //p.setFuelDate(to"1.1.2012");
-	      p.setKm_Total(1000);
-	      p.setKm_Trip(200);
-	      p.setPrice_Liter(1.99);
-	      p.setPrice_Total(24.25);
-	      p.setComment("Kommentar");
-	      p.setStation("Total AB");
-	      p.setConsumption(6.33);
+	      p.setFuelDate((Date) getFuelDate().getValue());
+	      p.setKm_Total((Double) getKm_Total().getValue());
+	      p.setKm_Trip((Double) getKm_Trip().getValue());
+	      p.setPrice_Liter((Double) getPrice_Liter().getValue());
+	      p.setPrice_Total((Double) getPrice_Total().getValue());
+	      p.setConsumption((Double) getConsumption().getValue());
+	      p.setComment((String) getComments().getValue());
+	      p.setStation((String) getStation().getValue());
 				// we can cast the return value of date input directly to "java.util.Date".
 	//      p.setEndDate((Date) getEndDate().getValue());
 	//      p.setStartDate((Date) getStartDate().getValue());

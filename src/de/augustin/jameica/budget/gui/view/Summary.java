@@ -2,18 +2,24 @@ package de.augustin.jameica.budget.gui.view;
 
 
 import de.augustin.jameica.budget.gui.control.SummaryControl;
-//import de.willuhn.jameica.example.Settings;
-//import de.willuhn.jameica.example.gui.control.ProjectControl;
 import de.willuhn.jameica.gui.AbstractView;
+import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.GUI;
+import de.willuhn.jameica.gui.input.Input;
+import de.willuhn.jameica.gui.input.TextInput;
+import de.willuhn.jameica.gui.internal.buttons.Back;
+import de.willuhn.jameica.gui.parts.ButtonArea;
 import de.willuhn.jameica.gui.util.ColumnLayout;
 import de.willuhn.jameica.gui.util.Container;
 import de.willuhn.jameica.gui.util.LabelGroup;
 import de.willuhn.jameica.gui.util.SimpleContainer;
+import de.willuhn.util.ApplicationException;
 
 
 public class Summary extends AbstractView
 {
+
+	private Object input;
 
 	public void bind() throws Exception {
 	
@@ -30,7 +36,7 @@ public class Summary extends AbstractView
 		// hat nichts mit dem Kopf zu tun ! 
 		
 	    Container c = new SimpleContainer(getParent());
-
+	    c.addHeadline("Summary");
 	    // layout with 2 columns
 	    ColumnLayout columns = new ColumnLayout(c.getComposite(),2);
 	    	// left side
@@ -44,21 +50,27 @@ public class Summary extends AbstractView
 
 	    	// right side
 	    Container right = new SimpleContainer(columns.getComposite());
-	    left.addHeadline(de.augustin.jameica.budget.Settings.i18n().tr("rechte Seite"));
-	    right.addInput(control.getPrice_Trip());
+	    right.addHeadline(de.augustin.jameica.budget.Settings.i18n().tr("rechte Seite"));
+	    right.addInput(control.getPrice_Liter());
 	    right.addInput(control.getStation());
 	    right.addInput(control.getConsumption());
 	    right.addInput(control.getComments());
-		
-	    // Zurück zum Container itself:
-	    c.addHeadline("Summary");
-	    // ##########leider wird die Tabelle selbst noch nicht ausgegeben
-	    // ###########natürlich wird die Tabelle nicht ausgegeben, weil das da nur den Kopfbereich festlegt
+	    
+	    ButtonArea buttons = new ButtonArea();
+	    buttons.addButton(new Back());
+	    //buttons.addButton(Settings.i18n().tr("Delete"),  	new ProjectDelete(),control.getCurrentObject());
+	    buttons.addButton(de.augustin.jameica.budget.Settings.i18n().tr("Store"),   	new Action()
+	    {
+	      public void handleAction(Object context) throws ApplicationException
+	      {
+	        control.handleStore();
+	      }
+	    },null,true); // "true" defines this button as the default button
+
+	    // Don't forget to paint the button area
+	    buttons.paint(getParent());    
 	    
 	    
-	    // hier wird ein neues Control-Object Instantiert und gemalt ^^ ... 
-	    //SummaryControl control = new SummaryControl(this);
-	    // Ich glaube, der Inhalt wird auch im getProjectsTable geholt ... 
 		control.getCarTable().paint(this.getParent());
 	
 	
