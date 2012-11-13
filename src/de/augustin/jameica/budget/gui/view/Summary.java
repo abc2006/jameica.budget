@@ -19,8 +19,6 @@ import de.willuhn.util.ApplicationException;
 public class Summary extends AbstractView
 {
 
-	private Object input;
-
 	public void bind() throws Exception {
 	
 		// draw the title

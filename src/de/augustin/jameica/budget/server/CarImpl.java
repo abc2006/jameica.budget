@@ -72,7 +72,7 @@ public class CarImpl extends AbstractDBObject implements Car
 	 */
 	public String getPrimaryAttribute() throws RemoteException
 	{
-    // we choose the projects name as primary field.
+    // we choose the total kilometers as primary field.
 		return "km_total";
 	}
 
@@ -136,7 +136,7 @@ public class CarImpl extends AbstractDBObject implements Car
 	 */
 	public Date getFuelDate() throws RemoteException
 	{
-    // Wen can cast this directly to String, the method getField() knows the
+    // When can cast this directly to String, the method getField() knows the
     // meta data of this sql table ;)
 		return (Date) getAttribute("fueldate"); // "fueldate" ist the sql field name
 	}
@@ -196,21 +196,6 @@ public class CarImpl extends AbstractDBObject implements Car
 	{
     return (String) getAttribute("comment");
 	}
-
-	
-	
-	/**
-	 * @see de.willuhn.jameica.example.rmi.Project#getPrice()
-	 */
-	// #########Das lassen wir mal grad als beispiel
-	//public double getPrice() throws RemoteException
-	//{
-    // AbstractDBObject will create a java.lang.Double.
-    // We only have to cast it.
-    //Double d = (Double) getAttribute("price");
-    //return d == null || Double.isNaN(d) ? 0.0 : d.doubleValue();
-	//}
-// ##############################Hier kommen jetzt die Setter.. 
 	/**
 	 * @see de.willuhn.jameica.example.rmi.Project#setName(java.lang.String)
 	 */
@@ -277,111 +262,4 @@ public class CarImpl extends AbstractDBObject implements Car
 	{
     setAttribute("comment",comment);
 	}
-
-	/**
-	 * @see de.willuhn.jameica.example.rmi.Project#getTasks()
-	 */
-/*	public DBIterator getTasks() throws RemoteException
-	{
-    try
-    {
-      // 1) Get the Database Service.
-      DBService service = this.getService();
-
-      // you can get the Database Service also via:
-      // DBService service = this.getService();
-      
-      // 3) We create the task list using getList(Class)
-      DBIterator tasks = service.createList(Task.class);
-      
-      // 4) we add a filter to only query for tasks with our project id
-      tasks.addFilter("project_id = " + this.getID());
-      
-      return tasks;
-    }
-    catch (Exception e)
-    {
-    	throw new RemoteException("unable to load task list",e);
-    }
-	}
-
-  *//**
-   * @see de.willuhn.jameica.example.rmi.Project#getEfforts()
-   *//*
-  public double getEfforts() throws RemoteException
-  {
-  	double sum = 0.0;
-  	DBIterator i = getTasks();
-  	while (i.hasNext())
-  	{
-  		Task t = (Task) i.next();
-  		sum += t.getEffort();
-  	}
-  	return sum;
-  }
-
-  *//**
-   * We overwrite the delete method to delete all assigned tasks too.
-   * @see de.willuhn.datasource.rmi.Changeable#delete()
-   *//*
-  public void delete() throws RemoteException, ApplicationException
-  {
-  	try
-  	{
-  		// we start a new transaction
-  		// to delete all or nothing
-  		this.transactionBegin();
-
-			DBIterator tasks = getTasks();
-			while (tasks.hasNext())
-			{
-				Task t = (Task) tasks.next();
-				t.delete();
-			}
-			super.delete(); // we delete the project itself
-
-			// everything seems to be ok, lets commit the transaction
-			this.transactionCommit();
-
-  	}
-  	catch (RemoteException re)
-  	{
-  		this.transactionRollback();
-  		throw re;
-  	}
-  	catch (ApplicationException ae)
-  	{
-			this.transactionRollback();
-  		throw ae;
-  	}
-  	catch (Throwable t)
-  	{
-			this.transactionRollback();
-  		throw new ApplicationException(Settings.i18n().tr("error while deleting project"),t);
-  	}
-  }
-
-  *//**
-   * @see de.willuhn.datasource.GenericObject#getAttribute(java.lang.String)
-   *//*
-  public Object getAttribute(String fieldName) throws RemoteException
-  {
-		// You are able to create virtual object attributes by overwriting
-		// this method. Just catch the fieldName and invent your own attributes ;)
-		if ("summary".equals(fieldName))
-		{
-			return new Double(getPrice() * getEfforts());
-		}
-
-    return super.getAttribute(fieldName);
-  }
-*/
 }
-
-
-/**********************************************************************
- * $Log: ProjectImpl.java,v $
- * Revision 1.9  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/

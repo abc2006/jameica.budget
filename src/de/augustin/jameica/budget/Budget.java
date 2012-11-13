@@ -3,7 +3,7 @@
 
 package de.augustin.jameica.budget;
 
-import de.willuhn.jameica.plugin.*;
+import de.willuhn.jameica.plugin.AbstractPlugin;
 
 
 

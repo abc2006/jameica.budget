@@ -92,11 +92,6 @@ public interface Car extends DBObject
 	   */
 	  public String getComment() throws RemoteException;
 	  
-	  /// erstmal die getter angepasst
-	  
-	  
-	  
-	  
 	  /**
 	   * Sets the name of the project.
 	   * @param name name of the project.
@@ -154,26 +149,4 @@ public interface Car extends DBObject
 	   * @throws RemoteException
 	   */
 	  public void setComment(String comment) throws RemoteException;
-	  
-	  
-	  
-	  // #############fertig mit settern 
-	  /**
-	   * Additionally we want to have a method that fetches all tasks from this project.
-	   * @return list of all tasks within this project.
-	   * @throws RemoteException
-	   */
-	  
-	  
-	  
-	  
-//	  public DBIterator getTasks() throws RemoteException;
-	  
-	  /**
-	   * Returns the effort summary from all tasks of this project. 
-	   * @return effort summary from all tasks of this project.
-	   * @throws RemoteException
-	   */
-//	  public double getEfforts() throws RemoteException;
-	
 }
