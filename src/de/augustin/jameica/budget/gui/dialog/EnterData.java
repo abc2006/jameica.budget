@@ -9,6 +9,9 @@ import org.eclipse.swt.widgets.Listener;
 import java.util.*;
 
 import de.augustin.jameica.budget.Plugin;
+import de.augustin.jameica.budget.Settings;
+import de.augustin.jameica.budget.gui.control.SummaryControl;
+//import de.willuhn.jameica.example.gui.view.ProjectControl;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.dialogs.AbstractDialog;
 import de.willuhn.jameica.gui.input.CheckboxInput;
@@ -35,6 +38,7 @@ public class EnterData extends AbstractDialog
 		this.setTitle("Eingabe-Fenster");
 		
 	}
+	
 	protected void paint(Composite parent) throws Exception
 	{
 		DecimalFormat Liter = new DecimalFormat("##.##");
@@ -44,34 +48,17 @@ public class EnterData extends AbstractDialog
 		liter.paint(parent);
 		
 		
-		final DateInput datum = new DateInput();
-		datum.setMandatory(true);
-		datum.setComment("Datum");
-		datum.paint(parent,100);
+		final DateInput datum = new DateInput(new Date());
+		datum.addListener(new org.eclipse.swt.widgets.Listener()
+		{
+			public void handleEvent(Event event)
+			{
+				Date value = (Date) datum.getValue();
+				Application.getMessagingFactory().sendMessage(new StatusBarMessage(value.toString(),StatusBarMessage.TYPE_SUCCESS));
+			}
+		});
 		
-		//DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
-		//datum.setValue(df);
-		//datum.setTitle("Hier bitte Datum angeben");
-		datum.addListener(new Listener()
-		  {
-		      public void handleEvent(Event event)
-		      {
-		        // Das Event wird immer dann ausgeloest, wenn sich der Focus
-		        // des Eingabe-Felds aendert. Also sowohl beim Aktivieren
-		        // als auch beim Deaktivieren.
-		        
-		    	
-		    	DateInput test = (DateInput) datum.getValue();
-		    	Application.getMessagingFactory().sendMessage(new StatusBarMessage("Nachricht 1",StatusBarMessage.TYPE_SUCCESS));
-		    	new de.augustin.jameica.budget.gui.action.About();
-		    	
-		      }
-		  }
-		  
-		);
-		
-		
-		
+		datum.paint(parent);
 		
 		CheckboxInput full = new CheckboxInput(false);
 		full.setName("Vollgetankt?");
@@ -104,13 +91,14 @@ public class EnterData extends AbstractDialog
 		Notizen.setHint("Sonstiges (Öl, Reifen, usw) ");
 		Notizen.paint(parent);
 		
-		
+	    // Instantiate controller
+	//    final SummaryControl control = new SummaryControl(AbstractView view);
 		
 		//IntegerInput km_tour = new IntegerInput();
 		//km_tour.paint(parent);
 		
 				
-		FormTextPart text = new FormTextPart();
+/*		FormTextPart text = new FormTextPart();
 		text.setText("<form>" +
 			"<p><b>Jameica example plugin</b></p>" +
 			"<br/>Licence: GPL (http://www.gnu.org/copyleft/gpl.html)" +
@@ -119,7 +107,7 @@ public class EnterData extends AbstractDialog
 			"</form>");
 
 		text.paint(parent);
-
+*/
 		LabelGroup group = new LabelGroup(parent, " Information ");
 
 		AbstractPlugin p = Application.getPluginLoader().getPlugin(Plugin.class);
@@ -141,15 +129,15 @@ public class EnterData extends AbstractDialog
 		{
 			public void handleAction(Object context) throws ApplicationException
 			{
-				de.augustin.jameica.budget.gui.control.SummaryControl.handleStore();
+				//new 
+				control.handleStore();
 				close(); // hier muss dann natürlich in die Datenbank geschrieben werden
 				Application.getMessagingFactory().sendMessage(new StatusBarMessage("Task stored successfully",StatusBarMessage.TYPE_SUCCESS));
 				//Nun möchte ich bitte auch aus der Datenbank auslesen und die Anzeige im Hintergrund aktualisieren... Naja, erstmal die Datenbank ... 
 				try {
-					new de.augustin.jameica.budget.gui.dialog.EnterData(100).open();
+					new EnterData(100).open();
 					
 					} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
