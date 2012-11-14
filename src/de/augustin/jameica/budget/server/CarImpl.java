@@ -27,8 +27,8 @@ import de.willuhn.util.ApplicationException;
 
 
 /**
- * This is the implemtor of the project interface.
- * You never need to instanciate this class directly.
+ * This is the implementor of the project interface.
+ * You never need to instantiate this class directly.
  * Instead of this, use the dbService to find the right
  * implementor of your interface.
  * Example:
@@ -126,8 +126,6 @@ public class CarImpl extends AbstractDBObject implements Car
 	 */
 	protected Class getForeignObject(String arg0) throws RemoteException
 	{
-    // We dont have any foreign keys here. Please check TaskImpl.java
-    // if you want to see an example.
 		return super.getForeignObject(arg0);
 	}
 // ######################jetzt kommen die getter, zumindest die, die mir bekannt sind

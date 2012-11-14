@@ -30,7 +30,7 @@ import de.willuhn.datasource.rmi.DBObject;
  */
 
 
-
+// dieses Interface wird von CarImpl.java implementiert
 
 public interface Car extends DBObject
 {

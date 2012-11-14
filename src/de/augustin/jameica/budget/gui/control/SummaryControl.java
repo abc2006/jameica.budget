@@ -14,11 +14,9 @@ import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Part;
 import de.willuhn.jameica.gui.formatter.CurrencyFormatter;
 import de.willuhn.jameica.gui.formatter.DateFormatter;
-import de.willuhn.jameica.gui.formatter.Formatter;
 import de.willuhn.jameica.gui.input.DateInput;
 import de.willuhn.jameica.gui.input.DecimalInput;
 import de.willuhn.jameica.gui.input.Input;
-import de.willuhn.jameica.gui.input.TextAreaInput;
 import de.willuhn.jameica.gui.input.TextInput;
 import de.willuhn.jameica.gui.parts.TablePart;
 import de.willuhn.jameica.messaging.StatusBarMessage;
@@ -33,7 +31,6 @@ public class SummaryControl extends AbstractControl
 	private TablePart vehicleList;
 	
 	// input fields for the vehicle Attributes
-	  // Input fields for the project attributes,
 	  private DateInput fueldate;
 	  private DecimalInput km_trip;
 	  private DecimalInput km_total;
@@ -48,7 +45,7 @@ public class SummaryControl extends AbstractControl
 	  
 	public SummaryControl(AbstractView view) 
 	{
-		super(view);
+		super(view); // dann wird hier doch ein abstractView erzeugt
 	}
 
 	  /**
