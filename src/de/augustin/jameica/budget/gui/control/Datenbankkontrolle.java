@@ -153,7 +153,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	//////////////////Ende Input-Getter
 	
 
-	public void handleStore() 
+	public void handleStore() throws ApplicationException 
 	{
 //		Application.getMessagingFactory().sendMessage(new StatusBarMessage("handleStore in Datenbankkontrolle, aufgerufen von Ichbindieview, Inhalt aus falschem zugriff" + notice.getValue() ,StatusBarMessage.TYPE_SUCCESS));
 		de.augustin.jameica.budget.rmi.DBValueInterface nochnDBVInterface = getDatenbankeintragungsinterface();
@@ -170,6 +170,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 			nochnDBVInterface.setStation((String) station.getValue());
 			nochnDBVInterface.setNotice((String) notice.getValue());
 //	        Application.getMessagingFactory().sendMessage(new StatusBarMessage("Inhalt aus richtigem Zugriff getValuenachher" + (String) notice.getValue(),StatusBarMessage.TYPE_SUCCESS));
+			this.view.reload();
 			try 
 			{
 				nochnDBVInterface.store();

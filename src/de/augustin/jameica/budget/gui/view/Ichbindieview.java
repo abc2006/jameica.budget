@@ -5,6 +5,7 @@ package de.augustin.jameica.budget.gui.view;
 import java.util.Date;
 
 import de.willuhn.jameica.gui.GUI;
+import de.willuhn.util.ApplicationException;
 
 
 
@@ -38,13 +39,14 @@ public class Ichbindieview extends de.willuhn.jameica.gui.AbstractView
 		buttonsaufdererstenview.addButton(new de.willuhn.jameica.gui.internal.buttons.Back());
 		buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("Daten in Datenbank eintragen"), new de.willuhn.jameica.gui.Action()
 		{
-			public void handleAction(Object context)
+			public void handleAction(Object context) throws ApplicationException
 			{
 			Datenbankkontrollobjekt.handleStore();
-			
-			new de.augustin.jameica.budget.gui.view.Ichbindieview();
+			//new de.augustin.jameica.budget.gui.view.Ichbindieview()
+			GUI.startView(de.augustin.jameica.budget.gui.view.Ichbindieview.class, null);
 			}
 		},null,true);
+		buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("aktualisieren"), new de.augustin.jameica.budget.gui.action.XMLAufruf(),null,true);
 		
 		//new de.augustin.jameica.budget.gui.view.Ichbindieview();
 		Datenbankkontrollobjekt.getZeigMirDieTabelle().paint(this.getParent());
