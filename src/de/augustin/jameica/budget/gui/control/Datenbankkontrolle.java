@@ -48,7 +48,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	public void handleStore() 
 	{
 		Application.getMessagingFactory().sendMessage(new StatusBarMessage("handleStore in Datenbankkontrolle, aufgerufen von Ichbindieview, Inhalt aus falschem zugriff" + ScheissText.getValue() ,StatusBarMessage.TYPE_SUCCESS));
-		de.augustin.jameica.neu.rmi.DBValueInterface nochnDBVInterface = getDatenbankeintragungsinterface();
+		de.augustin.jameica.budget.rmi.DBValueInterface nochnDBVInterface = getDatenbankeintragungsinterface();
 		
 		try 
 		{ // also ab hier klappt das eintragen. Jetzt wollen wir mal schauen, wies denn weiter aussieht ... 
@@ -86,7 +86,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 		//Allerdings beinhaltet dieses Viech keine funktion zum Einfügen.
 		//Warum das Einfügen jetzt so verdammt schwer ist... ich weiss es nicht... 
 		de.willuhn.datasource.rmi.DBService Datenbankservice = de.augustin.jameica.budget.Settings.getDBService();
-		de.willuhn.datasource.rmi.DBIterator Datenbankiterator = Datenbankservice.createList(de.augustin.jameica.neu.rmi.DBValueInterface.class);
+		de.willuhn.datasource.rmi.DBIterator Datenbankiterator = Datenbankservice.createList(de.augustin.jameica.budget.rmi.DBValueInterface.class);
 		ausgeleseneTabelle = new de.willuhn.jameica.gui.parts.TablePart(Datenbankiterator, new de.willuhn.jameica.gui.Action(){ public void handleAction(Object context){}});
 		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Buchstabensalat ;-)"),"buchstabensalat");
 		
@@ -96,13 +96,13 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	
 	
 	
-	private de.augustin.jameica.neu.rmi.DBValueInterface Datenbankeintragungsinterface;
+	private de.augustin.jameica.budget.rmi.DBValueInterface Datenbankeintragungsinterface;
 	
-	private de.augustin.jameica.neu.rmi.DBValueInterface getDatenbankeintragungsinterface()
+	private de.augustin.jameica.budget.rmi.DBValueInterface getDatenbankeintragungsinterface()
 	  {
 	    if ( Datenbankeintragungsinterface != null)
 	      return Datenbankeintragungsinterface;
-	    Datenbankeintragungsinterface = (de.augustin.jameica.neu.rmi.DBValueInterface) getCurrentObject();
+	    Datenbankeintragungsinterface = (de.augustin.jameica.budget.rmi.DBValueInterface) getCurrentObject();
 	    return Datenbankeintragungsinterface;
 	  }
 	

@@ -4,7 +4,7 @@ package de.augustin.jameica.budget.gui.action;
 
 import java.rmi.RemoteException;
 
-import de.augustin.jameica.neu.rmi.DBValueInterface;
+import de.augustin.jameica.budget.rmi.DBValueInterface;
 import de.willuhn.jameica.gui.GUI;
 import de.willuhn.util.ApplicationException;
 
@@ -36,7 +36,7 @@ public class XMLAufruf implements de.willuhn.jameica.gui.Action // wir implement
 		}
 		
 		//wegen startVIEW! wird hier natürlich auf die Datei unter de.augustin.jameica.neu.gui.view verwiesen
-		GUI.startView(de.augustin.jameica.neu.gui.view.Ichbindieview.class, i);
+		GUI.startView(de.augustin.jameica.budget.gui.view.Ichbindieview.class, i);
 		
 	}
 }
