@@ -3,6 +3,9 @@ package de.augustin.jameica.budget.gui.control;
 import java.rmi.RemoteException;
 import java.util.Date;
 
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+
 import de.willuhn.jameica.gui.input.DateInput;
 import de.willuhn.jameica.gui.input.Input;
 import de.willuhn.jameica.gui.input.TextInput;
@@ -54,6 +57,30 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	    kmtotal = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT);
 	    kmtotal.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Gesamtkilometer"));
 	    kmtotal.setName("Gesamtkilometer");
+	    kmtotal.addListener(new Listener() { // dieser Listener berechnet die Aufwände im Projekt-Details-Fenster
+	        public void handleEvent(Event event)
+	        {
+	          try
+	          {
+	              Double d = (Double) getKmTotaL().getValue();
+	              if (d == null)
+	                return;
+	              
+	              double p = d.doubleValue();
+	              if (Double.isNaN(p))
+	                return;
+	              
+	              double sum = 10 * p;
+	              
+	            getKmTriP().setValue(de.augustin.jameica.budget.Settings.DECIMALFORMAT.format(sum));
+	          }
+	          catch (Exception e)
+	          {
+	            Logger.error("error while setting kmtrip",e);
+	            Application.getMessagingFactory().sendMessage(new StatusBarMessage(de.augustin.jameica.budget.Settings.i18n().tr("Error while setting kmtrip: {0}",e.getMessage()),StatusBarMessage.TYPE_ERROR));
+	          }
+	        }
+	      });
 	    	return kmtotal;
 	}
 //################################################################################	
