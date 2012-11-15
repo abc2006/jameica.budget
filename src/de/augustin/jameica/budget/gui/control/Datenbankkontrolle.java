@@ -1,13 +1,18 @@
 package de.augustin.jameica.budget.gui.control;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.ListIterator;
 
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
 import de.willuhn.jameica.gui.input.DateInput;
 import de.willuhn.jameica.gui.input.Input;
+import de.willuhn.jameica.gui.input.MultiInput;
 import de.willuhn.jameica.gui.input.TextInput;
 import de.willuhn.jameica.gui.input.DecimalInput;
 import de.willuhn.jameica.gui.parts.TablePart;
@@ -20,6 +25,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 
 {
 	private de.willuhn.jameica.gui.parts.TablePart ausgeleseneTabelle;
+	private de.willuhn.jameica.gui.input.SelectInput vehicle;
 	private de.willuhn.jameica.gui.input.TextInput notice; 
 	private de.willuhn.jameica.gui.input.TextInput station; 
 	private de.willuhn.jameica.gui.input.DateInput datum;
@@ -29,7 +35,6 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	private de.willuhn.jameica.gui.input.DecimalInput pricetotal;
 	private de.willuhn.jameica.gui.input.DecimalInput consumption;
 
-
 	
 	public Datenbankkontrolle(de.willuhn.jameica.gui.AbstractView malwasanderesalsview)
 	{
@@ -38,6 +43,22 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	}
 	
 	 /////////////////////Input-Getter
+
+		public de.willuhn.jameica.gui.input.Input getVehiclE() throws RemoteException
+		{
+		Object[] vh = new Object[ 3 ]; 
+		vh[0] = "Motorrad AB-AR 7"; 
+		vh[1] = "Auto AB-NV 61"; 
+		vh[2] = "Fahrrad";
+		
+		
+			vehicle = new de.willuhn.jameica.gui.input.SelectInput(vh,null);
+//			priceliter.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Preis pro Liter"));
+			//priceliter.
+			vehicle.setName("Fahrzeug");
+		    	return vehicle;	
+		}
+	//################################################################################			
 	public de.willuhn.jameica.gui.input.Input getFuelDatE() throws RemoteException
 	{
 	if (datum != null)
@@ -45,6 +66,9 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	    
 	    datum = new DateInput(new Date(),de.augustin.jameica.budget.Settings.DATEFORMAT);
 	    datum.setName(de.augustin.jameica.budget.Settings.i18n().tr("Tankdatum"));
+	    datum.focus();
+	    // leicht kontraproduktiv ... 
+	    //datum.addListener(new Listener(){public void handleEvent(Event event){datum.setValue(null);}});
 	    
 	    	return datum;
 	}
@@ -99,7 +123,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	{
 	if (priceliter != null)
 	      return priceliter;
-	    
+    
 		priceliter = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT_2NK);
 		priceliter.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Preis pro Liter"));
 		priceliter.setName("Preis pro Liter");

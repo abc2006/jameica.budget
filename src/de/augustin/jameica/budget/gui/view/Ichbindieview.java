@@ -4,7 +4,14 @@ package de.augustin.jameica.budget.gui.view;
 
 import java.util.Date;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.TabFolder;
+
 import de.willuhn.jameica.gui.GUI;
+import de.willuhn.jameica.gui.input.TextInput;
+import de.willuhn.jameica.gui.util.Color;
+import de.willuhn.jameica.gui.util.TabGroup;
 import de.willuhn.util.ApplicationException;
 
 
@@ -18,6 +25,7 @@ public class Ichbindieview extends de.willuhn.jameica.gui.AbstractView
 	{
 		// nun wird der Titel gesetzt
 		GUI.getView().setTitle("Die View wurde erfolgreich gestartet");
+		
 		
 		// ein Control erstellen ... 
 		final de.augustin.jameica.budget.gui.control.Datenbankkontrolle Datenbankkontrollobjekt = new de.augustin.jameica.budget.gui.control.Datenbankkontrolle(this);
