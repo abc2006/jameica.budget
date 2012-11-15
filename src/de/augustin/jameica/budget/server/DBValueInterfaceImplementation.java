@@ -121,7 +121,7 @@ public class DBValueInterfaceImplementation extends AbstractDBObject implements 
 
 		public void setKmTotal(double kmtotal) throws RemoteException
 		{
-			setAttribute("kmtotal",kmtotal);
+			setAttribute("km_total",kmtotal);
 		}
 	//##################################################################################		
 		public double getKmTrip() throws RemoteException
@@ -131,7 +131,7 @@ public class DBValueInterfaceImplementation extends AbstractDBObject implements 
 
 		public void setKmTrip(double kmtrip) throws RemoteException
 		{
-			setAttribute("kmtrip",kmtrip);
+			setAttribute("km_trip",kmtrip);
 		}
 	//##################################################################################		
 		public double getPriceLiter() throws RemoteException
@@ -141,7 +141,7 @@ public class DBValueInterfaceImplementation extends AbstractDBObject implements 
 
 		public void setPriceLiter(double priceliter) throws RemoteException
 		{
-			setAttribute("priceliter",priceliter);
+			setAttribute("price_liter",priceliter);
 		}
 	//##################################################################################
 		public double getPriceTotal() throws RemoteException
@@ -151,7 +151,7 @@ public class DBValueInterfaceImplementation extends AbstractDBObject implements 
 
 		public void setPriceTotal(double pricetotal) throws RemoteException
 		{
-			setAttribute("pricetotal",pricetotal);
+			setAttribute("price_total",pricetotal);
 		}
 	//##################################################################################		
 		public double getConsumption() throws RemoteException

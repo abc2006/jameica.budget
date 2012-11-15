@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 
 import de.willuhn.jameica.gui.input.DateInput;
+import de.willuhn.jameica.gui.input.Input;
 import de.willuhn.jameica.gui.input.TextInput;
 import de.willuhn.jameica.gui.input.DecimalInput;
 import de.willuhn.jameica.gui.parts.TablePart;
@@ -34,83 +35,91 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	}
 	
 	 /////////////////////Input-Getter
-	public de.willuhn.jameica.gui.input.DateInput getFuelDatE() throws RemoteException
+	public de.willuhn.jameica.gui.input.Input getFuelDatE() throws RemoteException
 	{
 	if (datum != null)
 	      return datum;
 	    
-	    datum = new DateInput(getDatenbankeintragungsinterface().getFuelDate(),de.augustin.jameica.budget.Settings.DATEFORMAT);
+	    datum = new DateInput(new Date(),de.augustin.jameica.budget.Settings.DATEFORMAT);
 	    datum.setName(de.augustin.jameica.budget.Settings.i18n().tr("Tankdatum"));
+	    
 	    	return datum;
 	}
 //################################################################################
-	public de.willuhn.jameica.gui.input.DecimalInput getKmTotaL() throws RemoteException
+	public de.willuhn.jameica.gui.input.Input getKmTotaL() throws RemoteException
 	{
 	if (kmtotal != null)
 	      return kmtotal;
 	    
-	    kmtotal = new DecimalInput(getDatenbankeintragungsinterface().getKmTotal(),de.augustin.jameica.budget.Settings.DECIMALFORMAT);
+	    kmtotal = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT);
 	    kmtotal.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Gesamtkilometer"));
+	    kmtotal.setName("Gesamtkilometer");
 	    	return kmtotal;
 	}
 //################################################################################	
-	public de.willuhn.jameica.gui.input.DecimalInput getKmTriP() throws RemoteException
+	public de.willuhn.jameica.gui.input.Input getKmTriP() throws RemoteException
 	{
 	if (kmtrip != null)
 	      return kmtrip;
 	    
-		kmtrip = new DecimalInput(getDatenbankeintragungsinterface().getKmTotal(),de.augustin.jameica.budget.Settings.DECIMALFORMAT);
+		kmtrip = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT);
 		kmtrip.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Tageskilometer"));
+		kmtrip.setName("Tageskilometer");
 	    	return kmtrip;
 	}
 //################################################################################		
-	public de.willuhn.jameica.gui.input.DecimalInput getPriceLiteR() throws RemoteException
+	public de.willuhn.jameica.gui.input.Input getPriceLiteR() throws RemoteException
 	{
 	if (priceliter != null)
 	      return priceliter;
 	    
-		priceliter = new DecimalInput(getDatenbankeintragungsinterface().getKmTotal(),de.augustin.jameica.budget.Settings.DECIMALFORMAT);
+		priceliter = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT);
 		priceliter.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Preis pro Liter"));
+		priceliter.setName("Preis pro Liter");
 	    	return priceliter;
 	}
 //################################################################################			
-	public de.willuhn.jameica.gui.input.DecimalInput getPriceTotaL() throws RemoteException
+	public de.willuhn.jameica.gui.input.Input getPriceTotaL() throws RemoteException
 	{
 	if (pricetotal != null)
 	      return pricetotal;
 	    
-		pricetotal = new DecimalInput(getDatenbankeintragungsinterface().getKmTotal(),de.augustin.jameica.budget.Settings.DECIMALFORMAT);
+		pricetotal = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT);
 		pricetotal.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Preis Gesamt"));
+		pricetotal.setName("Gesamtpreis");
 	    	return pricetotal;
 	}
 //################################################################################			
-	public de.willuhn.jameica.gui.input.DecimalInput getConsumptioN() throws RemoteException
+	public de.willuhn.jameica.gui.input.Input getConsumptioN() throws RemoteException
 	{
 	if (consumption != null)
 	      return consumption;
 	    
-		consumption = new DecimalInput(getDatenbankeintragungsinterface().getKmTotal(),de.augustin.jameica.budget.Settings.DECIMALFORMAT);
+		consumption = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT);
 		consumption.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Verbrauch pro 100km"));
+		consumption.setName("Verbrauch l/100km");
 	    	return consumption;
 	}
 //################################################################################				
-	public de.willuhn.jameica.gui.input.TextInput getStatioN() throws RemoteException
+	public de.willuhn.jameica.gui.input.Input getStatioN() throws RemoteException
 	{
 	if (station != null)
 	      return station;
 	    
-		station = new DecimalInput(getDatenbankeintragungsinterface().getKmTotal(),de.augustin.jameica.budget.Settings.DECIMALFORMAT);
+		station = new TextInput("");
 		station.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Tankstelle"));
+		station.setName("Tankstelle");
 	    	return station;
 	}
-//################################################################################		public de.willuhn.jameica.gui.input.Input getDenScheissText() throws RemoteException
-	public de.willuhn.jameica.gui.input.TextInput getNoticE() throws RemoteException
+//################################################################################
+	public de.willuhn.jameica.gui.input.Input getNoticE() throws RemoteException
 	{
 	if (notice != null)
 	      return notice;
 	    
-		notice = new DecimalInput(getDatenbankeintragungsinterface().getKmTotal(),de.augustin.jameica.budget.Settings.DECIMALFORMAT);
+		notice = new TextInput("");
 		notice.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Notizen"));
+		notice.setName("Notizen");
 	    	return notice;
 	}
 //################################################################################	
@@ -119,7 +128,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 
 	public void handleStore() 
 	{
-		Application.getMessagingFactory().sendMessage(new StatusBarMessage("handleStore in Datenbankkontrolle, aufgerufen von Ichbindieview, Inhalt aus falschem zugriff" + notice.getValue() ,StatusBarMessage.TYPE_SUCCESS));
+//		Application.getMessagingFactory().sendMessage(new StatusBarMessage("handleStore in Datenbankkontrolle, aufgerufen von Ichbindieview, Inhalt aus falschem zugriff" + notice.getValue() ,StatusBarMessage.TYPE_SUCCESS));
 		de.augustin.jameica.budget.rmi.DBValueInterface nochnDBVInterface = getDatenbankeintragungsinterface();
 		
 		try 
@@ -133,7 +142,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 			nochnDBVInterface.setConsumption((double) consumption.getValue());
 			nochnDBVInterface.setStation((String) station.getValue());
 			nochnDBVInterface.setNotice((String) notice.getValue());
-	        Application.getMessagingFactory().sendMessage(new StatusBarMessage("Inhalt aus richtigem Zugriff getValuenachher" + (String) notice.getValue(),StatusBarMessage.TYPE_SUCCESS));
+//	        Application.getMessagingFactory().sendMessage(new StatusBarMessage("Inhalt aus richtigem Zugriff getValuenachher" + (String) notice.getValue(),StatusBarMessage.TYPE_SUCCESS));
 			try 
 			{
 				nochnDBVInterface.store();
@@ -159,14 +168,14 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 		de.willuhn.datasource.rmi.DBService Datenbankservice = de.augustin.jameica.budget.Settings.getDBService();
 		de.willuhn.datasource.rmi.DBIterator Datenbankiterator = Datenbankservice.createList(de.augustin.jameica.budget.rmi.DBValueInterface.class);
 		ausgeleseneTabelle = new de.willuhn.jameica.gui.parts.TablePart(Datenbankiterator, new de.willuhn.jameica.gui.Action(){ public void handleAction(Object context){}});
-		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Datum:-)"),"fueldate");
-		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Datum:-)"),"km_total");
-		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Datum:-)"),"km_trip");
-		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Datum:-)"),"price liter");
-		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Datum:-)"),"price total");
-		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Datum:-)"),"consumption");
-		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Datum:-)"),"station");
-		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Datum:-)"),"notice");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Tankdatum"),"fueldate");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Gesamtkilometer"),"km_total");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Tageskilometer"),"km_trip");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Preis pro Liter"),"price_liter");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Preis Gesamt"),"price_total");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Verbrauch"),"consumption");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Tankstelle"),"station");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Notiz"),"notice");
 
 		
 		
@@ -185,5 +194,5 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	    Datenbankeintragungsinterface = (de.augustin.jameica.budget.rmi.DBValueInterface) getCurrentObject();
 	    return Datenbankeintragungsinterface;
 	  }
-	
+
 }

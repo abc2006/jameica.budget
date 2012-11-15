@@ -26,13 +26,13 @@ public class Ichbindieview extends de.willuhn.jameica.gui.AbstractView
 		//wir versuchen uns mal an einem Input-Feld
 		// hier werden die getter aus Datenbankkontrolle.java verwendet:
 		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getFuelDatE());
-		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getKmTotaL());
-		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getKmTriP());
-		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getPriceLiteR());
-		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getPriceTotaL());
-		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getConsumptioN());
-		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getStatioN());
-		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getNoticE());
+		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getKmTotaL());
+		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getKmTriP());
+		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getPriceLiteR());
+		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getPriceTotaL());
+		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getConsumptioN());
+		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getStatioN());
+		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getNoticE());
 		
 		de.willuhn.jameica.gui.parts.ButtonArea buttonsaufdererstenview = new de.willuhn.jameica.gui.parts.ButtonArea();
 		buttonsaufdererstenview.addButton(new de.willuhn.jameica.gui.internal.buttons.Back());
