@@ -54,7 +54,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	if (kmtotal != null)
 	      return kmtotal;
 	    
-	    kmtotal = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT);
+	    kmtotal = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT_0NK);
 	    kmtotal.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Gesamtkilometer"));
 	    kmtotal.setName("Gesamtkilometer");
 	    kmtotal.addListener(new Listener() { // dieser Listener berechnet die Aufwände im Projekt-Details-Fenster
@@ -72,7 +72,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	              
 	              double sum = 10 * p;
 	              
-	            getKmTriP().setValue(de.augustin.jameica.budget.Settings.DECIMALFORMAT.format(sum));
+	            getKmTriP().setValue(de.augustin.jameica.budget.Settings.DECIMALFORMAT_0NK.format(sum));
 	          }
 	          catch (Exception e)
 	          {
@@ -89,7 +89,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	if (kmtrip != null)
 	      return kmtrip;
 	    
-		kmtrip = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT);
+		kmtrip = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT_0NK);
 		kmtrip.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Tageskilometer"));
 		kmtrip.setName("Tageskilometer");
 	    	return kmtrip;
@@ -100,7 +100,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	if (priceliter != null)
 	      return priceliter;
 	    
-		priceliter = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT);
+		priceliter = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT_2NK);
 		priceliter.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Preis pro Liter"));
 		priceliter.setName("Preis pro Liter");
 	    	return priceliter;
@@ -111,7 +111,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	if (pricetotal != null)
 	      return pricetotal;
 	    
-		pricetotal = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT);
+		pricetotal = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT_2NK);
 		pricetotal.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Preis Gesamt"));
 		pricetotal.setName("Gesamtpreis");
 	    	return pricetotal;
@@ -122,7 +122,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	if (consumption != null)
 	      return consumption;
 	    
-		consumption = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT);
+		consumption = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT_2NK);
 		consumption.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Verbrauch pro 100km"));
 		consumption.setName("Verbrauch l/100km");
 	    	return consumption;

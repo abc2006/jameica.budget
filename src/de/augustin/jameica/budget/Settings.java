@@ -28,6 +28,9 @@ public class Settings
 	   */
 	  public final static DecimalFormat DECIMALFORMAT = (DecimalFormat) DecimalFormat.getInstance(Application.getConfig().getLocale());
 
+	  public final static DecimalFormat DECIMALFORMAT_0NK = (DecimalFormat) new DecimalFormat("#");
+	  public final static DecimalFormat DECIMALFORMAT_1NK = (DecimalFormat) new DecimalFormat("#.0");
+	  public final static DecimalFormat DECIMALFORMAT_2NK = (DecimalFormat) new DecimalFormat("#.00");
 	  /**
 	   * Our currency name.
 	   */
