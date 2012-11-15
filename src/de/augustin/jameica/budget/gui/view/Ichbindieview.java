@@ -2,6 +2,8 @@
 package de.augustin.jameica.budget.gui.view;
 
 
+import java.util.Date;
+
 import de.willuhn.jameica.gui.GUI;
 
 
@@ -22,8 +24,15 @@ public class Ichbindieview extends de.willuhn.jameica.gui.AbstractView
 		// bei Willuhns werden die INPUT-Felder jetzt anders erstellt, nämlich von der Kontrolle:
 		de.willuhn.jameica.gui.util.Container neuercontainerfuerInputfelder = new de.willuhn.jameica.gui.util.SimpleContainer(getParent());  
 		//wir versuchen uns mal an einem Input-Feld
-		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getDenScheissText());
-		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getFuelDate());
+		// hier werden die getter aus Datenbankkontrolle.java verwendet:
+		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getFuelDatE());
+		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getKmTotaL());
+		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getKmTriP());
+		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getPriceLiteR());
+		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getPriceTotaL());
+		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getConsumptioN());
+		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getStatioN());
+		//neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getNoticE());
 		
 		de.willuhn.jameica.gui.parts.ButtonArea buttonsaufdererstenview = new de.willuhn.jameica.gui.parts.ButtonArea();
 		buttonsaufdererstenview.addButton(new de.willuhn.jameica.gui.internal.buttons.Back());
@@ -32,10 +41,12 @@ public class Ichbindieview extends de.willuhn.jameica.gui.AbstractView
 			public void handleAction(Object context)
 			{
 			Datenbankkontrollobjekt.handleStore();
-			//Datenbankkontrollobjekt.getZeigMirDieTabelle().paint(this.view.getParent());
+			
+			new de.augustin.jameica.budget.gui.view.Ichbindieview();
 			}
 		},null,true);
 		
+		//new de.augustin.jameica.budget.gui.view.Ichbindieview();
 		Datenbankkontrollobjekt.getZeigMirDieTabelle().paint(this.getParent());
 		
 		buttonsaufdererstenview.paint(getParent());
