@@ -44,7 +44,6 @@ public class IamTheVehicleView extends de.willuhn.jameica.gui.AbstractView
 		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getNoticE());
 		
 		de.willuhn.jameica.gui.parts.ButtonArea buttonsaufdererstenview = new de.willuhn.jameica.gui.parts.ButtonArea();
-		buttonsaufdererstenview.addButton(new de.willuhn.jameica.gui.internal.buttons.Back());
 		buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("Daten in Datenbank eintragen"), new de.willuhn.jameica.gui.Action()
 		{
 			public void handleAction(Object context) throws ApplicationException

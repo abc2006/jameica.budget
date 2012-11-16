@@ -121,8 +121,8 @@ public class MetersDBControl extends de.willuhn.jameica.gui.AbstractControl
 	      return consumption;
 	    
 		consumption = new DecimalInput(de.augustin.jameica.budget.Settings.DECIMALFORMAT_2NK);
-		consumption.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Verbrauch pro 100km"));
-		consumption.setName("Verbrauch l/100km");
+		consumption.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Consumption"));
+		consumption.setName("Consumption");
 	    	return consumption;
 	}
 //################################################################################
@@ -132,8 +132,8 @@ public class MetersDBControl extends de.willuhn.jameica.gui.AbstractControl
 	      return notice;
 	    
 		notice = new TextInput("");
-		notice.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Notizen"));
-		notice.setName("Notizen");
+		notice.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Notices"));
+		notice.setName("Notices");
 	    	return notice;
 	}
 //################################################################################	
@@ -143,7 +143,7 @@ public class MetersDBControl extends de.willuhn.jameica.gui.AbstractControl
 	public void handleStore() throws ApplicationException 
 	{
 //		Application.getMessagingFactory().sendMessage(new StatusBarMessage("handleStore in Datenbankkontrolle, aufgerufen von Ichbindieview, Inhalt aus falschem zugriff" + notice.getValue() ,StatusBarMessage.TYPE_SUCCESS));
-		de.augustin.jameica.budget.rmi.DBMetersInterface DBMInterface = getDBInsertInterface();
+		de.augustin.jameica.budget.rmi.DBMetersInterface DBMInterface = this.getDBInsertInterface();
 		
 		try 
 		{ 
@@ -176,7 +176,7 @@ public class MetersDBControl extends de.willuhn.jameica.gui.AbstractControl
 	public de.willuhn.jameica.gui.Part getZeigMirDieTabelle() throws Exception
 	{
 		de.willuhn.datasource.rmi.DBService Datenbankservice = de.augustin.jameica.budget.Settings.getDBService();
-		de.willuhn.datasource.rmi.DBIterator Datenbankiterator = Datenbankservice.createList(de.augustin.jameica.budget.rmi.DBVehicleInterface.class);
+		de.willuhn.datasource.rmi.DBIterator Datenbankiterator = Datenbankservice.createList(de.augustin.jameica.budget.rmi.DBMetersInterface.class);
 		dbtable = new de.willuhn.jameica.gui.parts.TablePart(Datenbankiterator, new de.willuhn.jameica.gui.Action(){ public void handleAction(Object context){}});
 		dbtable.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Reading Date"),"readingdate");
 		dbtable.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Meter Reading"),"meterreading");
