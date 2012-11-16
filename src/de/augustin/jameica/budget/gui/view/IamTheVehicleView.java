@@ -11,6 +11,9 @@ import org.eclipse.swt.widgets.TabFolder;
 import de.willuhn.jameica.gui.GUI;
 import de.willuhn.jameica.gui.input.TextInput;
 import de.willuhn.jameica.gui.util.Color;
+import de.willuhn.jameica.gui.util.ColumnLayout;
+import de.willuhn.jameica.gui.util.Container;
+import de.willuhn.jameica.gui.util.SimpleContainer;
 import de.willuhn.jameica.gui.util.TabGroup;
 import de.willuhn.util.ApplicationException;
 
@@ -26,23 +29,29 @@ public class IamTheVehicleView extends de.willuhn.jameica.gui.AbstractView
 		// nun wird der Titel gesetzt
 		GUI.getView().setTitle("Vehicle Management");
 		
-		
 		// ein Control erstellen ... 
 		final de.augustin.jameica.budget.gui.control.VehicleDBControl Datenbankkontrollobjekt = new de.augustin.jameica.budget.gui.control.VehicleDBControl(this);
 		
 		// bei Willuhns werden die INPUT-Felder jetzt anders erstellt, nämlich von der Kontrolle:
 		de.willuhn.jameica.gui.util.Container neuercontainerfuerInputfelder = new de.willuhn.jameica.gui.util.SimpleContainer(getParent());  
-		//wir versuchen uns mal an einem Input-Feld
+		
+	    // layout with 2 columns
+	    ColumnLayout columns = new ColumnLayout(neuercontainerfuerInputfelder.getComposite(),3);
+	    Container left = new SimpleContainer(columns.getComposite());
+	    Container center = new SimpleContainer(columns.getComposite());
+	    Container right = new SimpleContainer(columns.getComposite());
+	    //wir versuchen uns mal an einem Input-Feld
 		// hier werden die getter aus Datenbankkontrolle.java verwendet:
-		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getFuelDatE());
-		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getKmTotaL());
-		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getKmTriP());
-		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getPriceLiteR());
-		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getPriceTotaL());
-		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getConsumptioN());
+		left.addInput(Datenbankkontrollobjekt.getFuelDatE());
+		center.addInput(Datenbankkontrollobjekt.getKmTotaL());
+		right.addInput(Datenbankkontrollobjekt.getKmTriP());
+		
+		left.addInput(Datenbankkontrollobjekt.getPriceLiteR());
+		center.addInput(Datenbankkontrollobjekt.getPriceTotaL());
+		right.addInput(Datenbankkontrollobjekt.getConsumptioN());
+
 		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getStatioN());
 		neuercontainerfuerInputfelder.addInput(Datenbankkontrollobjekt.getNoticE());
-		
 		de.willuhn.jameica.gui.parts.ButtonArea buttonsaufdererstenview = new de.willuhn.jameica.gui.parts.ButtonArea();
 		buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("Daten in Datenbank eintragen"), new de.willuhn.jameica.gui.Action()
 		{
@@ -54,7 +63,7 @@ public class IamTheVehicleView extends de.willuhn.jameica.gui.AbstractView
 			}
 		},null,true);
 		
-		buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("aktualisieren"), new de.augustin.jameica.budget.gui.action.XMLAufrufVehicle(),null,true);
+		buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("aktualisieren"), new de.augustin.jameica.budget.gui.action.XMLAufrufVehicle(),null,false);
 		
 		//new de.augustin.jameica.budget.gui.view.Ichbindieview();
 		Datenbankkontrollobjekt.getZeigMirDieTabelle().paint(this.getParent());

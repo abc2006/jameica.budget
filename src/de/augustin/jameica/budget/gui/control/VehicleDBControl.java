@@ -228,7 +228,15 @@ public class VehicleDBControl extends de.willuhn.jameica.gui.AbstractControl
 		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Verbrauch"),"consumption");
 		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Tankstelle"),"station");
 		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Notiz"),"notice");
-
+		ausgeleseneTabelle.addSelectionListener(new Listener() {
+		    public void handleEvent(Event event)
+		    {
+		      Object o = event.data;
+		//      Object p = event.
+				Application.getMessagingFactory().sendMessage(new StatusBarMessage(de.augustin.jameica.budget.Settings.i18n().tr(event.toString()),StatusBarMessage.TYPE_ERROR));
+		      // In event.data befindet sich dann direkt das markierte Fachobjekt. Falls mehrere markiert sind, ist o ein Array.
+		    }
+		  });
 		
 		
 			return ausgeleseneTabelle;
