@@ -21,7 +21,7 @@ import de.willuhn.jameica.system.Application;
 import de.willuhn.logging.Logger;
 import de.willuhn.util.ApplicationException;
 
-public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
+public class VehicleDBControl extends de.willuhn.jameica.gui.AbstractControl
 
 {
 	private de.willuhn.jameica.gui.parts.TablePart ausgeleseneTabelle;
@@ -36,7 +36,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	private de.willuhn.jameica.gui.input.DecimalInput consumption;
 
 	
-	public Datenbankkontrolle(de.willuhn.jameica.gui.AbstractView malwasanderesalsview)
+	public VehicleDBControl(de.willuhn.jameica.gui.AbstractView malwasanderesalsview)
 	{
 		// wovon ich aber immer noch nicht weis, was das hier jetzt genau macht ... 
 		super(malwasanderesalsview);
@@ -180,7 +180,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	public void handleStore() throws ApplicationException 
 	{
 //		Application.getMessagingFactory().sendMessage(new StatusBarMessage("handleStore in Datenbankkontrolle, aufgerufen von Ichbindieview, Inhalt aus falschem zugriff" + notice.getValue() ,StatusBarMessage.TYPE_SUCCESS));
-		de.augustin.jameica.budget.rmi.DBValueInterface nochnDBVInterface = getDatenbankeintragungsinterface();
+		de.augustin.jameica.budget.rmi.DBVehicleInterface nochnDBVInterface = getDatenbankeintragungsinterface();
 		
 		try 
 		{ 
@@ -218,7 +218,7 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	public de.willuhn.jameica.gui.Part getZeigMirDieTabelle() throws Exception
 	{
 		de.willuhn.datasource.rmi.DBService Datenbankservice = de.augustin.jameica.budget.Settings.getDBService();
-		de.willuhn.datasource.rmi.DBIterator Datenbankiterator = Datenbankservice.createList(de.augustin.jameica.budget.rmi.DBValueInterface.class);
+		de.willuhn.datasource.rmi.DBIterator Datenbankiterator = Datenbankservice.createList(de.augustin.jameica.budget.rmi.DBVehicleInterface.class);
 		ausgeleseneTabelle = new de.willuhn.jameica.gui.parts.TablePart(Datenbankiterator, new de.willuhn.jameica.gui.Action(){ public void handleAction(Object context){}});
 		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Tankdatum"),"fueldate");
 		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Gesamtkilometer"),"km_total");
@@ -237,13 +237,13 @@ public class Datenbankkontrolle extends de.willuhn.jameica.gui.AbstractControl
 	
 	
 	
-	private de.augustin.jameica.budget.rmi.DBValueInterface Datenbankeintragungsinterface;
+	private de.augustin.jameica.budget.rmi.DBVehicleInterface Datenbankeintragungsinterface;
 	
-	private de.augustin.jameica.budget.rmi.DBValueInterface getDatenbankeintragungsinterface()
+	private de.augustin.jameica.budget.rmi.DBVehicleInterface getDatenbankeintragungsinterface()
 	  {
 	    if ( Datenbankeintragungsinterface != null)
 	      return Datenbankeintragungsinterface;
-	    Datenbankeintragungsinterface = (de.augustin.jameica.budget.rmi.DBValueInterface) getCurrentObject();
+	    Datenbankeintragungsinterface = (de.augustin.jameica.budget.rmi.DBVehicleInterface) getCurrentObject();
 	    return Datenbankeintragungsinterface;
 	  }
 

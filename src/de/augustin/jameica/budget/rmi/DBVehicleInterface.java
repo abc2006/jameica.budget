@@ -5,10 +5,10 @@ import java.util.Date;
 
 import de.willuhn.jameica.gui.input.DecimalInput;
 
-public interface DBValueInterface extends de.willuhn.datasource.rmi.DBObject
+public interface DBVehicleInterface extends de.willuhn.datasource.rmi.DBObject
 {
-	// Hier werden die Schnittstellen definiert, die dann in DBValueInterfaceImplementation ausprogrammiert sind 
-	//public int getKmTotal() throws RemoteException; // der name KmTotal() ist der gleiche wie in DBVAlueInterfaceImplementation
+	// Hier werden die Schnittstellen definiert, die dann in DBVehicleInterfaceImplementation ausprogrammiert sind 
+	//public int getKmTotal() throws RemoteException; // der name KmTotal() ist der gleiche wie in DBVehicleInterfaceImplementation
 	//public void setKmTotal(int kmtotaL);
 
 	public Date getFuelDate() throws RemoteException;

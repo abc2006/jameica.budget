@@ -12,3 +12,13 @@ CREATE TABLE test (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE meters (
+	id NUMERIC default UNIQUEKEY('meters'),
+	readingdate date,
+	meterreading double,
+	newmeter boolean,
+	consumption double,
+	notice text,
+	UNIQUE (id),
+	PRIMARY KEY (id)
+);

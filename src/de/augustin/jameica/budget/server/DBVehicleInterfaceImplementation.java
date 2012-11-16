@@ -25,13 +25,13 @@ import de.willuhn.util.ApplicationException;
  * c) list existing projects
  * DBIterator projects = service.createList(Project.class);
  */
-public class DBValueInterfaceImplementation extends AbstractDBObject implements de.augustin.jameica.budget.rmi.DBValueInterface
+public class DBVehicleInterfaceImplementation extends AbstractDBObject implements de.augustin.jameica.budget.rmi.DBVehicleInterface
 {
 
 	/**
    * @throws RemoteException
    */
-  public DBValueInterfaceImplementation() throws RemoteException
+  public DBVehicleInterfaceImplementation() throws RemoteException
   {
     super();
   }

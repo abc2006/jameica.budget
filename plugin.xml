@@ -30,7 +30,9 @@
   <!-- the content of this tag will appear within the navigation tree on the left hand //-->
   <navigation>
     <item name="Budget Plugin" icon-close="folder.png" icon-open="folder-open.png">
-    <item name="Vehicle Management" icon-close="text-x-generic.png" action="de.augustin.jameica.budget.gui.action.XMLAufruf" />
+    <item name="Vehicle Management" icon-close="text-x-generic.png" action="de.augustin.jameica.budget.gui.action.XMLAufrufVehicle" />
+    <item name="Meters Management" icon-close="text-x-generic.png" action="de.augustin.jameica.budget.gui.action.XMLAufrufMeters" />
+    
     </item>
   </navigation>
   <services>
