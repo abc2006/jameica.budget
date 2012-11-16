@@ -17,7 +17,7 @@ import de.willuhn.util.ApplicationException;
 
 
 // wir müssen AbstractView erweitern, ich weiss nur noch nicht, warum
-public class Ichbindieview extends de.willuhn.jameica.gui.AbstractView
+public class Ichbindiefahrzeugview extends de.willuhn.jameica.gui.AbstractView
 {
 	// da in der AbstractView die Methode bind() ohne geschweifte Klammern angegeben ist,
 	//müssen wir diese nun hier definieren. Sie wird aufgerufen, wenn die View gestartet wird.
@@ -51,7 +51,7 @@ public class Ichbindieview extends de.willuhn.jameica.gui.AbstractView
 			{
 			Datenbankkontrollobjekt.handleStore();
 			//new de.augustin.jameica.budget.gui.view.Ichbindieview()
-			GUI.startView(de.augustin.jameica.budget.gui.view.Ichbindieview.class, null);
+			GUI.startView(de.augustin.jameica.budget.gui.view.Ichbindiefahrzeugview.class, null);
 			}
 		},null,true);
 		buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("aktualisieren"), new de.augustin.jameica.budget.gui.action.XMLAufruf(),null,true);

@@ -36,7 +36,7 @@ public class XMLAufruf implements de.willuhn.jameica.gui.Action // wir implement
 		}
 		
 		//wegen startVIEW! wird hier natürlich auf die Datei unter de.augustin.jameica.neu.gui.view verwiesen
-		GUI.startView(de.augustin.jameica.budget.gui.view.Ichbindieview.class, i);
+		GUI.startView(de.augustin.jameica.budget.gui.view.Ichbindiefahrzeugview.class, i);
 		
 	}
 }
