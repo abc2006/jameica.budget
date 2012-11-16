@@ -23,13 +23,14 @@
   <!-- The content of the following tag is displayed in the menu bar. //-->
   <menu>
 
-    <item name="Neu Plugin">
+    <item name="Budget Plugin">
     </item>
   </menu>
 
   <!-- the content of this tag will appear within the navigation tree on the left hand //-->
   <navigation>
-    <item name="Neu Plugin" icon-close="folder.png" icon-open="folder-open.png" action="de.augustin.jameica.budget.gui.action.XMLAufruf">
+    <item name="Budget Plugin" icon-close="folder.png" icon-open="folder-open.png">
+    <item name="Vehicle Management" icon-close="text-x-generic.png" action="de.augustin.jameica.budget.gui.action.XMLAufruf" />
     </item>
   </navigation>
   <services>

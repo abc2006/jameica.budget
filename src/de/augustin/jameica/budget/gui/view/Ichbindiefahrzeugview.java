@@ -54,7 +54,7 @@ public class Ichbindiefahrzeugview extends de.willuhn.jameica.gui.AbstractView
 			GUI.startView(de.augustin.jameica.budget.gui.view.Ichbindiefahrzeugview.class, null);
 			}
 		},null,true);
-		buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("aktualisieren"), new de.augustin.jameica.budget.gui.action.XMLAufruf(),null,true);
+		buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("aktualisieren"), new de.augustin.jameica.budget.gui.action.XMLAufrufVehicle(),null,true);
 		
 		//new de.augustin.jameica.budget.gui.view.Ichbindieview();
 		Datenbankkontrollobjekt.getZeigMirDieTabelle().paint(this.getParent());

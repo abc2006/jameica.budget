@@ -9,7 +9,7 @@ import de.willuhn.jameica.gui.GUI;
 import de.willuhn.util.ApplicationException;
 
 
-public class XMLAufruf implements de.willuhn.jameica.gui.Action // wir implementieren das Interface Action
+public class XMLAufrufVehicle implements de.willuhn.jameica.gui.Action // wir implementieren das Interface Action
 {
 	// weil das Interface Action implementiert ist, müssen wir eine funktion/Methode handleAction() definieren
 	public void handleAction(Object context) throws ApplicationException
