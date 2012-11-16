@@ -220,6 +220,7 @@ public class VehicleDBControl extends de.willuhn.jameica.gui.AbstractControl
 		de.willuhn.datasource.rmi.DBService Datenbankservice = de.augustin.jameica.budget.Settings.getDBService();
 		de.willuhn.datasource.rmi.DBIterator Datenbankiterator = Datenbankservice.createList(de.augustin.jameica.budget.rmi.DBVehicleInterface.class);
 		ausgeleseneTabelle = new de.willuhn.jameica.gui.parts.TablePart(Datenbankiterator, new de.willuhn.jameica.gui.Action(){ public void handleAction(Object context){}});
+		ausgeleseneTabelle.setMulti(true);
 		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Tankdatum"),"fueldate");
 		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Gesamtkilometer"),"km_total");
 		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Tageskilometer"),"km_trip");
@@ -232,8 +233,9 @@ public class VehicleDBControl extends de.willuhn.jameica.gui.AbstractControl
 		    public void handleEvent(Event event)
 		    {
 		      Object o = event.data;
+		      String s = (String) ausgeleseneTabelle.getSelection().toString();
 		//      Object p = event.
-				Application.getMessagingFactory().sendMessage(new StatusBarMessage(de.augustin.jameica.budget.Settings.i18n().tr(event.toString()),StatusBarMessage.TYPE_ERROR));
+				Application.getMessagingFactory().sendMessage(new StatusBarMessage(de.augustin.jameica.budget.Settings.i18n().tr(s),StatusBarMessage.TYPE_ERROR));
 		      // In event.data befindet sich dann direkt das markierte Fachobjekt. Falls mehrere markiert sind, ist o ein Array.
 		    }
 		  });
