@@ -35,7 +35,7 @@ public class IamTheVehicleView extends de.willuhn.jameica.gui.AbstractView
 		// bei Willuhns werden die INPUT-Felder jetzt anders erstellt, nämlich von der Kontrolle:
 		de.willuhn.jameica.gui.util.Container neuercontainerfuerInputfelder = new de.willuhn.jameica.gui.util.SimpleContainer(getParent());  
 		
-		
+		//comment
 		ColumnLayout top = new ColumnLayout(neuercontainerfuerInputfelder.getComposite(),1);
 		Container topcenter = new SimpleContainer(top.getComposite());
 		topcenter.addInput(Datenbankkontrollobjekt.getVehiclE());
