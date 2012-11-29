@@ -24,6 +24,8 @@
   <menu>
 
     <item name="Budget Plugin">
+          <item name="New Table" shortcut="ALT+P" action="de.augustin.jameica.budget.gui.action.XMLAufrufCreateTableDialog" />
+    
     </item>
   </menu>
 

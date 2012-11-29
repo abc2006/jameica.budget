@@ -36,6 +36,7 @@ public class Plugin extends AbstractPlugin
 
 				// create the sql tables.
 	      db.executeSQLScript(new File(mf.getPluginDir() + File.separator + "sql","create.sql"));
+	      
 
 				// That's all. Database installed and tables created ;)
 	    }

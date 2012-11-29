@@ -16,7 +16,6 @@ public class Settings
 	private static I18N i18n;
 	private static DBService db;
 	
-	private final static de.willuhn.jameica.system.Settings settings = Application.getPluginLoader().getPlugin(Plugin.class).getResources().getSettings();
 	
 	/**
 	   * Our DateFormatter.
@@ -74,4 +73,4 @@ public class Settings
 				throw new RemoteException("error while getting database service",e);
 			}
 		}
-}
+	 }
