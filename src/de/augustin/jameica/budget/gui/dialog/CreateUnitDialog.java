@@ -24,14 +24,14 @@ import de.augustin.jameica.budget.gui.control.UnitsDBControl;
 /**
  * Our "About..." dialog.
  */
-public class CreateTableDialog extends AbstractDialog
+public class CreateUnitDialog extends AbstractDialog
 {
 
   /**
    * ct.
    * @param position
    */
-  public CreateTableDialog(int position)
+  public CreateUnitDialog(int position)
   {
     super(position,true);
     this.setTitle(Settings.i18n().tr("About..."));
