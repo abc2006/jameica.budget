@@ -14,7 +14,7 @@ public class XMLAufrufCreateTableDialog implements Action
   {
   	try
   	{
-			new de.augustin.jameica.budget.gui.dialog.CreateTableDialog(AbstractDialog.POSITION_CENTER).open();
+			new de.augustin.jameica.budget.gui.dialog.CreateUnitDialog(AbstractDialog.POSITION_CENTER).open();
   	}
     catch (ApplicationException ae)
     {

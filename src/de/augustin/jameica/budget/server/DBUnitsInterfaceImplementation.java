@@ -2,8 +2,6 @@ package de.augustin.jameica.budget.server;
 
 import java.rmi.RemoteException;
 import de.willuhn.datasource.db.AbstractDBObject;
-import de.willuhn.jameica.gui.input.DecimalInput;
-import de.willuhn.jameica.util.DateUtil;
 import de.willuhn.util.ApplicationException;
 
 
@@ -25,13 +23,13 @@ import de.willuhn.util.ApplicationException;
  * c) list existing projects
  * DBIterator projects = service.createList(Project.class);
  */
-public class DBVehicleInterfaceImplementation extends AbstractDBObject implements de.augustin.jameica.budget.rmi.DBVehicleInterface
+public class DBUnitsInterfaceImplementation extends AbstractDBObject implements de.augustin.jameica.budget.rmi.DBUnitsInterface
 {
 
 	/**
    * @throws RemoteException
    */
-  public DBVehicleInterfaceImplementation() throws RemoteException
+  public DBUnitsInterfaceImplementation() throws RemoteException
   {
     super();
   }
@@ -43,7 +41,7 @@ public class DBVehicleInterfaceImplementation extends AbstractDBObject implement
   // okay, dann geben wir mal den sql-Tabellennamen hier an .. der da lautet ? test
 	protected String getTableName()
 	{
-		return "vehicles";
+		return "units";
 	}
 
   /**
@@ -102,96 +100,26 @@ public class DBVehicleInterfaceImplementation extends AbstractDBObject implement
 ///////////////////////////hier kommen getter und setter, die in der DBValueInterface.java 
 	///////////////////////definiert sind und in der Datenbankkontrolle beim HandleStore
 	///////////////////////verwendet werden.
-	/////////Die funktionsnamen müssen mit der DBValueinterface.java übereinstimmen
+	/////////Die funktionsnamen müssen mit der DBUnitsInterface.java übereinstimmen
 	//###########################################################################
-	public int getVehicleId() throws RemoteException
-	{
-		return (int) getAttribute("vehicle_id"); // "name" ist the sql field name
-	}
-
-	public void setVehicleId(int vehicle_id) throws RemoteException
-	{
-		setAttribute("vehicle_id",vehicle_id);
-	}
-	//###########################################################################
-		public java.util.Date getFuelDate() throws RemoteException
+		public String getName() throws RemoteException
 		{
-			return (java.util.Date) getAttribute("fueldate"); // "name" ist the sql field name
+			return (String) getAttribute("name"); // "name" ist the sql field name
 		}
 
-		public void setFuelDate(java.util.Date fueldate) throws RemoteException
+		public void setName(String name) throws RemoteException
 		{
-			setAttribute("fueldate",fueldate);
-		}
-	//#################################################################################
-		public double getKmTotal() throws RemoteException
-		{
-			return (double) getAttribute("kmtotal"); // "name" ist the sql field name
-		}
-
-		public void setKmTotal(double kmtotal) throws RemoteException
-		{
-			setAttribute("km_total",kmtotal);
-		}
-	//##################################################################################		
-		public double getKmTrip() throws RemoteException
-		{
-			return (double) getAttribute("kmtrip"); // "name" ist the sql field name
-		}
-
-		public void setKmTrip(double kmtrip) throws RemoteException
-		{
-			setAttribute("km_trip",kmtrip);
-		}
-	//##################################################################################		
-		public double getPriceLiter() throws RemoteException
-		{
-			return (double) getAttribute("priceliter"); // "name" ist the sql field name
-		}
-
-		public void setPriceLiter(double priceliter) throws RemoteException
-		{
-			setAttribute("price_liter",priceliter);
-		}
-	//##################################################################################
-		public double getPriceTotal() throws RemoteException
-		{
-			return (double) getAttribute("pricetotal"); // "name" ist the sql field name
-		}
-
-		public void setPriceTotal(double pricetotal) throws RemoteException
-		{
-			setAttribute("price_total",pricetotal);
-		}
-	//##################################################################################		
-		public double getConsumption() throws RemoteException
-		{
-			return (double) getAttribute("consumption"); // "name" ist the sql field name
-		}
-
-		public void setConsumption(double consumption) throws RemoteException
-		{
-			setAttribute("consumption",consumption);
-		}
-	//##################################################################################			
-		public String getStation() throws RemoteException
-		{
-			return (String) getAttribute("station"); // "name" ist the sql field name
-		}
-
-		public void setStation(String station) throws RemoteException
-		{
-			setAttribute("station",station);
+			setAttribute("name",name);
 		}
 	//###########################################################################
-		public String getNotice() throws RemoteException
+		public String getNumberPlate() throws RemoteException
 		{
-		return (String) getAttribute("notice"); // "name" ist the sql field name
+		return (String) getAttribute("numberplate"); // "name" ist the sql field name
 		}
 
-		public void setNotice(String notice) throws RemoteException
+		public void setNumberPlate(String numberplate) throws RemoteException
 		{
-			setAttribute("notice",notice);
+			setAttribute("numberplate",numberplate);
 		}
 	//###########################################################################
 

@@ -2,6 +2,7 @@ package de.augustin.jameica.budget.gui.control;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -10,9 +11,12 @@ import java.util.ListIterator;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
+import de.augustin.jameica.budget.Settings;
+import de.augustin.jameica.budget.rmi.DBUnitsInterface;
+import de.augustin.jameica.budget.rmi.DBVehicleInterface;
 import de.willuhn.jameica.gui.input.DateInput;
 import de.willuhn.jameica.gui.input.Input;
-import de.willuhn.jameica.gui.input.MultiInput;
+import de.willuhn.jameica.gui.input.IntegerInput;
 import de.willuhn.jameica.gui.input.TextInput;
 import de.willuhn.jameica.gui.input.DecimalInput;
 import de.willuhn.jameica.gui.parts.TablePart;
@@ -26,6 +30,7 @@ public class VehicleDBControl extends de.willuhn.jameica.gui.AbstractControl
 {
 	private de.willuhn.jameica.gui.parts.TablePart ausgeleseneTabelle;
 	private de.willuhn.jameica.gui.input.SelectInput vehicle;
+	private de.willuhn.jameica.gui.input.IntegerInput vehicle_id;
 	private de.willuhn.jameica.gui.input.TextInput notice; 
 	private de.willuhn.jameica.gui.input.TextInput station; 
 	private de.willuhn.jameica.gui.input.DateInput datum;
@@ -41,24 +46,46 @@ public class VehicleDBControl extends de.willuhn.jameica.gui.AbstractControl
 		// wovon ich aber immer noch nicht weis, was das hier jetzt genau macht ... 
 		super(malwasanderesalsview);
 	}
+	///////////// ich weiss noch nicht genau, was das macht:
+	 // private Task getTask()
+	//	{
+	//		if (task != null)
+	//			return task;
+	//		task = (Task) getCurrentObject();
+	//		return task;
+	//	}
 	
-	 /////////////////////Input-Getter
+		 /////////////////////Input-Getter
 
 		public de.willuhn.jameica.gui.input.Input getVehiclE() throws RemoteException
 		{
-		Object[] vh = new Object[ 3 ]; 
-		vh[0] = "Motorrad AB-AR 7"; 
-		vh[1] = "Auto AB-NV 61"; 
-		vh[2] = "Fahrrad";
+		//Object[] vh = new Object[ 3 ]; 
+		//vh[0] = "Motorrad AB-AR 7"; 
+		//vh[1] = "Auto AB-NV 61"; 
+		//vh[2] = "Fahrrad";
 		
 		
-			vehicle = new de.willuhn.jameica.gui.input.SelectInput(vh,null);
+		//	vehicle = new de.willuhn.jameica.gui.input.SelectInput(vh,null);
+			vehicle = new de.willuhn.jameica.gui.input.SelectInput(Settings.getDBService().createList(DBUnitsInterface.class),null);
+			
 //			priceliter.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Preis pro Liter"));
 			//priceliter.
 			vehicle.setName("Fahrzeug");
 		    	return vehicle;	
 		}
-	//################################################################################			
+		//################################################################################			
+		public de.willuhn.jameica.gui.input.Input getVehicleiD() throws RemoteException
+		{
+		if (vehicle_id != null)
+		      return vehicle_id;
+		    
+			vehicle_id = new IntegerInput();
+			vehicle_id.setValue(1);
+			vehicle_id.setName(de.augustin.jameica.budget.Settings.i18n().tr("vehicle_id"));
+		    	return vehicle_id;
+		}
+
+		//################################################################################			
 	public de.willuhn.jameica.gui.input.Input getFuelDatE() throws RemoteException
 	{
 	if (datum != null)
@@ -185,6 +212,7 @@ public class VehicleDBControl extends de.willuhn.jameica.gui.AbstractControl
 		try 
 		{ 
 			
+			nochnDBVInterface.setVehicleId((int) vehicle_id.getValue());
 			nochnDBVInterface.setFuelDate((Date) datum.getValue());
 			nochnDBVInterface.setKmTotal((double) kmtotal.getValue());
 			nochnDBVInterface.setKmTrip((double) kmtrip.getValue());
@@ -194,7 +222,6 @@ public class VehicleDBControl extends de.willuhn.jameica.gui.AbstractControl
 			nochnDBVInterface.setStation((String) station.getValue());
 			nochnDBVInterface.setNotice((String) notice.getValue());
 //	        Application.getMessagingFactory().sendMessage(new StatusBarMessage("Inhalt aus richtigem Zugriff getValuenachher" + (String) notice.getValue(),StatusBarMessage.TYPE_SUCCESS));
-			this.view.reload();
 			try 
 			{
 				nochnDBVInterface.store();
@@ -217,6 +244,7 @@ public class VehicleDBControl extends de.willuhn.jameica.gui.AbstractControl
 	
 	public de.willuhn.jameica.gui.Part getZeigMirDieTabelle() throws Exception
 	{
+		
 		de.willuhn.datasource.rmi.DBService Datenbankservice = de.augustin.jameica.budget.Settings.getDBService();
 		de.willuhn.datasource.rmi.DBIterator Datenbankiterator = Datenbankservice.createList(de.augustin.jameica.budget.rmi.DBVehicleInterface.class);
 		ausgeleseneTabelle = new de.willuhn.jameica.gui.parts.TablePart(Datenbankiterator, new de.willuhn.jameica.gui.Action(){ public void handleAction(Object context){}});
@@ -229,21 +257,40 @@ public class VehicleDBControl extends de.willuhn.jameica.gui.AbstractControl
 		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Verbrauch"),"consumption");
 		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Tankstelle"),"station");
 		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Notiz"),"notice");
+		
 		ausgeleseneTabelle.addSelectionListener(new Listener() {
 		    public void handleEvent(Event event)
 		    {
 		      Object o = event.data;
-		      String s = (String) ausgeleseneTabelle.getSelection().toString();
+		      System.out.println( Arrays.asList(o) );
+		      String s = (String) Arrays.deepToString((Object[]) o);
 		//      Object p = event.
-				Application.getMessagingFactory().sendMessage(new StatusBarMessage(de.augustin.jameica.budget.Settings.i18n().tr(s),StatusBarMessage.TYPE_ERROR));
+				Application.getMessagingFactory().sendMessage(new StatusBarMessage(de.augustin.jameica.budget.Settings.i18n().tr(s),StatusBarMessage.TYPE_SUCCESS));
 		      // In event.data befindet sich dann direkt das markierte Fachobjekt. Falls mehrere markiert sind, ist o ein Array.
 		    }
+		
 		  });
 		
 		
 			return ausgeleseneTabelle;
 	} //getZeigMirDieTabelle()
 	
+	public de.willuhn.jameica.gui.Part getNeueTabelle(Object neu) throws Exception
+	{
+		
+		Object[] vh = new Object[ 9 ]; 
+		vh[0] = "25.03.1983"; 
+		vh[1] = 123; 
+		vh[2] = 123;
+		vh[3] = 123;
+		vh[4] = 123;
+		vh[5] = 123;
+		vh[6] = 123;
+		vh[7] = "123";
+		vh[8] = "123";
+		ausgeleseneTabelle.addItem(vh);
+		return ausgeleseneTabelle;
+	}
 	
 	
 	

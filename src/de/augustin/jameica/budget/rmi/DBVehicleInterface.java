@@ -10,6 +10,9 @@ public interface DBVehicleInterface extends de.willuhn.datasource.rmi.DBObject
 	// Hier werden die Schnittstellen definiert, die dann in DBVehicleInterfaceImplementation ausprogrammiert sind 
 	//public int getKmTotal() throws RemoteException; // der name KmTotal() ist der gleiche wie in DBVehicleInterfaceImplementation
 	//public void setKmTotal(int kmtotaL);
+	
+	public int getVehicleId() throws RemoteException;
+	public void setVehicleId(int id) throws RemoteException;
 
 	public Date getFuelDate() throws RemoteException;
 	public void setFuelDate(Date datum) throws RemoteException;

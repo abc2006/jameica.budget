@@ -39,6 +39,7 @@ public class IamTheVehicleView extends de.willuhn.jameica.gui.AbstractView
 		ColumnLayout top = new ColumnLayout(neuercontainerfuerInputfelder.getComposite(),1);
 		Container topcenter = new SimpleContainer(top.getComposite());
 		topcenter.addInput(Datenbankkontrollobjekt.getVehiclE());
+		topcenter.addInput(Datenbankkontrollobjekt.getVehicleiD());
 		
 	    // layout with 3 columns
 		ColumnLayout center = new ColumnLayout(neuercontainerfuerInputfelder.getComposite(),3);
@@ -63,21 +64,29 @@ public class IamTheVehicleView extends de.willuhn.jameica.gui.AbstractView
 	    
 		floorcenter.addInput(Datenbankkontrollobjekt.getStatioN());
 		floorcenter.addInput(Datenbankkontrollobjekt.getNoticE());
+		
+		Datenbankkontrollobjekt.getZeigMirDieTabelle().paint(this.getParent());
+		
 		de.willuhn.jameica.gui.parts.ButtonArea buttonsaufdererstenview = new de.willuhn.jameica.gui.parts.ButtonArea();
 		buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("Daten in Datenbank eintragen"), new de.willuhn.jameica.gui.Action()
 		{
 			public void handleAction(Object context) throws ApplicationException
 			{
 			Datenbankkontrollobjekt.handleStore();
-			//new de.augustin.jameica.budget.gui.view.Ichbindieview()
-			GUI.startView(de.augustin.jameica.budget.gui.view.IamTheVehicleView.class, null);
+			try {
+				Object neu = null;
+				Datenbankkontrollobjekt.getNeueTabelle(neu);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			}
 		},null,true);
 		
-		buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("aktualisieren"), new de.augustin.jameica.budget.gui.action.XMLAufrufVehicle(),null,false);
+		//buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("aktualisieren"), new de.augustin.jameica.budget.gui.action.XMLAufrufVehicle(),null,false);
 		
 		//new de.augustin.jameica.budget.gui.view.Ichbindieview();
-		Datenbankkontrollobjekt.getZeigMirDieTabelle().paint(this.getParent());
+		
 		
 		buttonsaufdererstenview.paint(getParent());
 	}
