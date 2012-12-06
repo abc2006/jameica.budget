@@ -1,0 +1,118 @@
+Hi,
+
+vorab: einige deiner Fragen verstehe ich nicht richtig, weil ich nicht weiss, wann du mit "Tabelle" eine SQL-Tabelle in der Datenbank meinst und wann eine SWT-Tabelle in der Benutzeroberflaeche. Hinzukommt, dass ich ohne entsprechende Quellcode-Schnipsel auch nur vermuten kann, was du programmiert hast.
+
+    Zum Beispiel schaffe ich es nicht, eine Tabelle nach dem Eintragen sofort
+    neu zu laden, damit der soeben getätigte Eintrag erscheint.
+
+
+Lade nicht die Tabelle neu sondern fuege stattdessen die neu angelegten Objekte hinzu:
+
+table.addItem(deinObjekt);
+
+
+    Ich habe z.B. ein Eingabeformular für Daten in einer View, das klappt
+    jetzt. Jetzt möchte ich gerne über einen Dialog neue Fahrzeuge hinzufügen.
+    Mir wäre am liebsten, für jedes Fahrzeug eine eigene Tabelle anzulegen,
+    allerdings scheint das nicht ohne weiteres zur Laufzeit zu gehen ( hab ich
+    mich aber noch nicht ausführlich mit beschäftigt).
+
+
+Jeweils eine SQL-Tabelle? Sowas macht man nicht - das gilt als schlechter Stil und ist ein Indiz, dass die Daten nicht korrekt normalisiert sind. Was spricht denn dagegen, eine Tabelle "Fahrzeuge" anzulegen in der alle Fahrzeuge landen.
+
+    ... irgendwie nicht in der Lage, aus dem Dialog heraus etwas in
+    die Datenbank einzutragen.
+
+
+Hier braeuchte ich schonmal konkreten Quellcode, an dem ich sehen kann, was du da versucht hast.
+
+    wie kann ich einfach (a la phpMyAdmin) auf die Datenbank zugreifen,
+    um mir alle Felder/alle Werte/sonstiges ausgeben zu lassen?
+
+
+Das haengt von der verwendeten Datenbank ab. Bei MySQL kannst du phpMyAdmin nehmen. Bei einer der embedded JDBC-Datenbanken wie H2 oder McKoi geht das ueber einen SQL-Client, der JDBC kann.
+
+Z.Bsp:
+http://dbclient.java.net/
+http://squirrel-sql.sourceforge.net/
+
+    Kann ich irgendwie normale Mysql-Statements abgeben?
+    ("Select * from test")
+
+
+Das sind keine spezifischen "MySQL"-Statements sondern Standard SQL-Abfragen. Entweder mit o.g. Tools. Oder aus dem Programmcode heraus mit:
+
+DBService service = ....; // z.Bsp. Settings.getDBService();
+Object result = service.execute("select * from test",params,new ResultSetExtractor()
+{
+  public Object extract(ResultSet rs) throws RemoteException, SQLException
+  {
+    while (rs.next())
+    {
+      ...
+    }
+    return ...;
+  }
+});
+
+Wird z.Bsp. hier verwendet: https://github.com/willuhn/hibiscus/blob/master/src/de/willuhn/jameica/hbci/server/DBPropertyUtil.java
+(ab Zeile 74)
+
+    Wie kann ich die Breite von Tabellenspalten festlegen?
+
+
+Die Breite kann nicht explizit angegeben werden. Mit "table.setRememberColWidths(true)" kann man die Tabelle aber so einstellen, dass sie sich die vom User eingestellten Breiten automatisch merkt. Generell sollte man Breiten nicht explizit vorgeben, da du nicht weisst, welche Aufloesung der Monitor des Users hat und wie gross er das Programmfenster gestellt hat. Sowas sollte der User besser selbst einstellen.
+
+    Ich komme mit der Anleitung für den zugriff auf Tabelleninhalte/
+    SelectionListener nicht klar. Geht das genauer?
+
+
+Hier braeuchte ich schon eine konkrete Frage.
+
+    Wie komme ich konkret an den Inhalt der Zelle/Spalte?
+
+
+Wozu? Die Tabellen sind doch nicht wie in Excel, wo der User Daten eingibt. Stattdessen hast du Objekte in einer Datenbank, die in der Tabelle lediglich angezeigt - jedoch nicht vom Benutzer direkt in dieser bearbeitet werden. Von daher kennst du doch die Werte bereits - dein Programm hat sie doch selbst da rein geschrieben.
+
+    Datenbanken: wie kann ich auf eine Datenbank zugreifen, um mir den
+    letzten Wert ausgeben zu lassen ( eg zuletzt eingetragen/höchster
+    kilometerstand usw)
+
+
+Long l = (Long) service.execute("select max(kilometerstand) from tabelle",null,new ResultSetExtractor()
+{
+  public Object extract(ResultSet rs) throws RemoteException, SQLException
+  {
+    if (rs.next())
+      return rs.getLong(1);
+  }
+});
+
+    Wie kann ich aus einer Tabelle alle Zeilen auslesen/ausgeben, bei denen
+    ding_id = 7 ist?
+
+
+DBIterator list = service.createList(DeinDBObject.class);
+list.addFilter("ding_id = 7");
+
+Findest du auch im Beispiel-Plugin in ProjectImpl.java (getTasks()).
+
+    Die Input-Felder werden nicht mehr direkt gemalt, sondern
+    als Input über die Datenbankkontrolle an den Container übergeben.
+    Wie komme ich jetzt an funktionen wie zum Beispiel die Breite?
+
+
+Die Breite kann nicht vorgegeben werden - das regelt Jameica automatisch ueber Layout-Manager. Hibiscus macht das beispielsweise auch nirgends.
+
+    Wie kann ich eine Tabelle nach dem Einfügen von Werten (über
+    einen Container in der View oder über einen Dialog) aktualisieren,
+    damit der aktuell eingetragene Wert sofort erscheint?
+
+
+// Objekt aus Tabelle entfernen und an gleicher Position wieder einfuegen.
+int pos = table.removeItem(o);
+if (pos >= 0)
+  table.addItem(o,pos);
+
+// Oder seit gestern ist in Jameica auch folgendes moeglich:
+table.updateItem(objectOld,objectNew);
