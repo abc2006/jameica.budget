@@ -1,0 +1,191 @@
+Inhalt von Zelle XY
+
+Hallo Olaf, 
+folgende Frage: 
+
+Ich habe eine Tabelle mit Kilometerständen/Tankständen. Nun möchte ich den Durchschnittsverbrauch der markierten Zellen berechnen: 
+
+MarkierteZelleKilometer2-MarkierteZelleKilometer1 = DeltaKilometer
+MarkierteZeileTank2+MarkierteZeileTank1=Gesamtverbrauch
+Durchschnittsverbrauch=Gesamtverbrauch/DeltaKilometer
+
+Soweit sogut. Jetzt will ich das ganze in die Tabelle bekommen: 
+
+########################################################################
+######################Die View:#########################################
+######################################################################## 
+
+public class IamTheVehicleView extends de.willuhn.jameica.gui.AbstractView
+{
+	// da in der AbstractView die Methode bind() ohne geschweifte Klammern angegeben ist,
+	//müssen wir diese nun hier definieren. Sie wird aufgerufen, wenn die View gestartet wird.
+	public void bind() throws Exception
+	{
+		// nun wird der Titel gesetzt
+		GUI.getView().setTitle("Vehicle Management");
+		
+		// ein Control erstellen ... 
+		final de.augustin.jameica.budget.gui.control.VehicleDBControl Datenbankkontrollobjekt = new de.augustin.jameica.budget.gui.control.VehicleDBControl(this);
+		
+		// bei Willuhns werden die INPUT-Felder jetzt anders erstellt, nämlich von der Kontrolle:
+		de.willuhn.jameica.gui.util.Container neuercontainerfuerInputfelder = new de.willuhn.jameica.gui.util.SimpleContainer(getParent());  
+		
+		//
+		ColumnLayout top = new ColumnLayout(neuercontainerfuerInputfelder.getComposite(),1);
+		Container topcenter = new SimpleContainer(top.getComposite());
+		topcenter.addInput(Datenbankkontrollobjekt.getVehiclE());
+		topcenter.addInput(Datenbankkontrollobjekt.getVehicleiD());
+		
+	    // layout with 3 columns
+		ColumnLayout center = new ColumnLayout(neuercontainerfuerInputfelder.getComposite(),3);
+	    Container centerleft = new SimpleContainer(center.getComposite());
+	    Container centercenter = new SimpleContainer(center.getComposite());
+	    Container centerright = new SimpleContainer(center.getComposite());
+	    //wir versuchen uns mal an einem Input-Feld
+		// hier werden die getter aus Datenbankkontrolle.java verwendet:
+		
+		
+	    centerleft.addInput(Datenbankkontrollobjekt.getFuelDatE());
+	    centercenter.addInput(Datenbankkontrollobjekt.getKmTotaL());
+	    centerright.addInput(Datenbankkontrollobjekt.getKmTriP());
+		
+	    centerleft.addInput(Datenbankkontrollobjekt.getPriceLiteR());
+	    centercenter.addInput(Datenbankkontrollobjekt.getPriceTotaL());
+	    centerright.addInput(Datenbankkontrollobjekt.getConsumptioN());
+		
+	    
+		ColumnLayout floor = new ColumnLayout(neuercontainerfuerInputfelder.getComposite(),1);
+		Container floorcenter = new SimpleContainer(floor.getComposite());
+	    
+		floorcenter.addInput(Datenbankkontrollobjekt.getStatioN());
+		floorcenter.addInput(Datenbankkontrollobjekt.getNoticE());
+		
+		Datenbankkontrollobjekt.getZeigMirDieTabelle().paint(this.getParent());
+		
+		// UNTERHALB DER TABELLE MÖCHTE ICH DIE DURCHSCHNITTSWERTE ANZEIGEN
+		new Input LabelInput("Verbrauch", $Durchschnittsverbrauch); // oder so ähnlich, ich weiss, dass die Syntax nicht stimmt
+		// ENDE
+		
+		
+		de.willuhn.jameica.gui.parts.ButtonArea buttonsaufdererstenview = new de.willuhn.jameica.gui.parts.ButtonArea();
+		buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("Daten in Datenbank eintragen"), new de.willuhn.jameica.gui.Action()
+		{
+			public void handleAction(Object context) throws ApplicationException
+			{
+			Datenbankkontrollobjekt.handleStore();
+			//FRAGE (1): HIER SPEICHERE ICH MEINE DATEN AUS DEN OBIGEN INPUTFELDERN IN DIE DATENBANK. DAS KLAPPT.
+			WIE ÜBERREDE ICH DIE TABELLE IN DER VIEW DAZU, MEINE DATEN SOFORT ANZUZEIGEN? 
+			table.addItem(neueZeile)/table.updateItem(xxx)
+			(1) //WOHER BEKOMM ICH DIE table UND WOHER BEKOMME ICH DIE neueZeile? 
+			}
+		},null,true);
+		
+		//buttonsaufdererstenview.addButton(de.augustin.jameica.budget.Settings.i18n().tr("aktualisieren"), new de.augustin.jameica.budget.gui.action.XMLAufrufVehicle(),null,false);
+		
+		//new de.augustin.jameica.budget.gui.view.Ichbindieview();
+		
+		
+		buttonsaufdererstenview.paint(getParent());
+	}
+}
+
+
+#######################################################################################
+#############Die Control:##############################################################
+#######################################################################################
+
+		 /////////////////////Input-Getter
+		public de.willuhn.jameica.gui.input.Input getVehiclE() throws RemoteException
+		{
+		// FRAGE (2):
+		//FOLGENDES FUNKTIONIERT UND BIETET MIR MOTORRAD; AUTO UND FAHRRAD ZUR AUSWAHL
+		//Object[] vh = new Object[ 3 ]; 
+		//vh[0] = "Motorrad AB-AR 7"; 
+		//vh[1] = "Auto AB-NV 61"; 
+		//vh[2] = "Fahrrad";
+		//	vehicle = new de.willuhn.jameica.gui.input.SelectInput(vh,null);
+		
+		// FOLGENDES ( AUS GUI/CONTROL/TASKCONTROL KOPIERT) FUNKTIONIERT NICHT:
+			vehicle = new de.willuhn.jameica.gui.input.SelectInput(Settings.getDBService().createList(DBUnitsInterface.class),null);
+
+//			priceliter.setHint(de.augustin.jameica.budget.Settings.i18n().tr("Preis pro Liter"));
+			//priceliter.
+			//vehicle.setName("Fahrzeug");
+		    	return vehicle;	
+		// WARUM? (2)
+		}
+
+public void handleStore() throws ApplicationException 
+	{
+//		Application.getMessagingFactory().sendMessage(new StatusBarMessage("handleStore in Datenbankkontrolle, aufgerufen von Ichbindieview, Inhalt aus falschem zugriff" + notice.getValue() ,StatusBarMessage.TYPE_SUCCESS));
+		de.augustin.jameica.budget.rmi.DBVehicleInterface nochnDBVInterface = getDatenbankeintragungsinterface();
+		
+		try 
+		{ 
+			
+			nochnDBVInterface.setVehicleId((int) vehicle_id.getValue());
+			nochnDBVInterface.setFuelDate((Date) datum.getValue());
+			nochnDBVInterface.setKmTotal((double) kmtotal.getValue());
+			nochnDBVInterface.setKmTrip((double) kmtrip.getValue());
+			nochnDBVInterface.setPriceLiter((double) priceliter.getValue());
+			nochnDBVInterface.setPriceTotal((double) pricetotal.getValue());
+			nochnDBVInterface.setConsumption((double) consumption.getValue());
+			nochnDBVInterface.setStation((String) station.getValue());
+			nochnDBVInterface.setNotice((String) notice.getValue());
+//	        Application.getMessagingFactory().sendMessage(new StatusBarMessage("Inhalt aus richtigem Zugriff getValuenachher" + (String) notice.getValue(),StatusBarMessage.TYPE_SUCCESS));
+			try 
+			{
+				nochnDBVInterface.store();
+				Application.getMessagingFactory().sendMessage(new StatusBarMessage(de.augustin.jameica.budget.Settings.i18n().tr("Eintrag erfolgreich gespeichert"),StatusBarMessage.TYPE_SUCCESS));
+			}
+			catch (ApplicationException e)
+		    {
+				Application.getMessagingFactory().sendMessage(new StatusBarMessage(e.getMessage(),StatusBarMessage.TYPE_ERROR));
+		    }
+		}
+		catch (RemoteException e)
+		{
+			Logger.error("error while storing project",e);
+			Application.getMessagingFactory().sendMessage(new StatusBarMessage(de.augustin.jameica.budget.Settings.i18n().tr("Error while storing: {0}",e.getMessage()),StatusBarMessage.TYPE_ERROR));
+		}
+	}// handleStore()
+	
+	
+	
+	
+	public de.willuhn.jameica.gui.Part getZeigMirDieTabelle() throws Exception
+	{
+		
+		de.willuhn.datasource.rmi.DBService Datenbankservice = de.augustin.jameica.budget.Settings.getDBService();
+		de.willuhn.datasource.rmi.DBIterator Datenbankiterator = Datenbankservice.createList(de.augustin.jameica.budget.rmi.DBVehicleInterface.class);
+		ausgeleseneTabelle = new de.willuhn.jameica.gui.parts.TablePart(Datenbankiterator, new de.willuhn.jameica.gui.Action(){ public void handleAction(Object context){}});
+		ausgeleseneTabelle.setMulti(true);
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Tankdatum"),"fueldate");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Gesamtkilometer"),"km_total");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Tageskilometer"),"km_trip");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Preis pro Liter"),"price_liter");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Preis Gesamt"),"price_total");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Verbrauch"),"consumption");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Tankstelle"),"station");
+		ausgeleseneTabelle.addColumn(de.augustin.jameica.budget.Settings.i18n().tr("Notiz"),"notice");
+		FRAGE (3):
+		// HIER KANN ICH DEN SELECTIONLISTENER AUFRUFEN. 
+		ausgeleseneTabelle.addSelectionListener(new Listener() {
+		    public void handleEvent(Event event)
+		    {
+		    	//WIE KOMME ICH AN DIE DATEN DES MARKIERTEN FELDES?:
+		      long MarkierteZeile1Kilometer = ???????????????????????
+		      long MarkierteZeile2Kilometer = ???????????????????????
+		      long MarkierteZeile1Tank = ????????????????????????????
+		      long MarkierteZeile2Tank = ????????????????????????????
+		      MarkierteZeile2Kilometer-MarkierteZeile1Kilometer = DeltaKilometer
+		      MarkierteZeile2Tank+MarkierteZeile1Tank=Gesamtverbrauch
+		      Durchschnittsverbrauch=Gesamtverbrauch/DeltaKilometer
+			//(3) JETZT HAB ICH DIE WERTE. WIE BEKOMME ICH DIESE IN DIE VIEW ZUM SOFORTIGEN ANZEIGEN?
+			( ALSO SOFORT; WENN ICH GEKLICKT HABE!)
+
+	    }
+		
+		  });
+			return ausgeleseneTabelle;
+	} //getZeigMirDieTabelle()
